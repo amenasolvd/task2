@@ -124,13 +124,4 @@ public class Library {
             System.out.print(bookList.get(i));
         }
     }
-
- /*   public Book searchBookByName(Item item) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (item.getTitle().equals(bookList.get(i).getTitle())) {
-                return bookList.get(i);
-            }
-        }
-        return bookList;
-    } */
 }
