@@ -1,26 +1,26 @@
+package Peoples;
 import java.util.ArrayList;
 import java.lang.String;
-/* Description: class constructor for Manager, does not require any additional parameters
-   beyond the parent class */
+import Items.Book;
+import Items.Item;
+import Main.Library;
 public class Manager extends Staff {
 
-    Manager(String firstname, String lastname, String email_add,String phone_no, String employee_ID, String designation, String department) {
+    public Manager(String firstname, String lastname, String email_add,String phone_no,
+            String employee_ID, String designation, String department) {
+
         super(firstname, lastname, email_add, phone_no, employee_ID, designation, department);
     }
 
-    //method to add new book
-    public void addBook(Book book){
-
-        ArrayList<Book>bookList = new ArrayList<>();
-        bookList.add(new Book("","","","","",""));
+    public void addBook(Library library, Book book){
+        library.getBookList().add(book);
     }
 
-    //method to delete book by using book.item_Id
-    public void deleteBook(Book book){
-        book.getItem_Id();
-        ArrayList<Book>bookList = new ArrayList<>();
-        if (book.getItem_Id().equals(book.item_Id)){
-            bookList.remove(new Book("", "", "", "", "", ""));
+    public void deleteBook(Book book, Library library){
+        book.getItemId();
+        if (book.getItemId().equals(library.getBookList())){
+        library.getBookList().remove(book);
+        return;
         }
     }
 }

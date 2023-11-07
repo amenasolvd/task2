@@ -1,4 +1,6 @@
-//Staff Class is child class of Person Class
+package Peoples;
+
+//Peoples.Staff Class is child class of Peoples.Person Class
 public class Staff extends Person {
     final String employee_Id;
     final String designation;

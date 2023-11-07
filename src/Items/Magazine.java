@@ -1,10 +1,13 @@
+package Items;
+
 import java.util.Objects;
 public class Magazine extends Item {
     final String item_Id;
     final String publication;
     final String category;
 
-    Magazine(String title, String item_Id, String publication, String category) {
+    public Magazine(String title, String item_Id, String publication, String category) {
+
         super(title);
         this.item_Id = item_Id;
         this.publication = publication;
@@ -53,7 +56,7 @@ public class Magazine extends Item {
     //overriding toString method for magazine info
     @Override
     public String toString() {
-        return "Magazine{" +
+        return "Items.Magazine{" +
                 "item_Id='" + item_Id + '\'' +
                 ", publication='" + publication + '\'' +
                 ", category='" + category + '\'' +

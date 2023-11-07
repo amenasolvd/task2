@@ -1,10 +1,20 @@
-public class Item {
-    double item_Id;
-    final String title;
-    String genre;
-    String publication;
+package Items;
 
-    Item(String title) {
+public abstract class Item {
+    private String itemId;
+    private String title;
+    private String genre;
+    private String publication;
+
+    public Item(String title) {
+
         this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(){
+        return;
     }
 }

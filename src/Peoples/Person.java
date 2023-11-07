@@ -1,10 +1,11 @@
-//Person Class is parent class for Member and Staff class
-public class Person {
+package Peoples;
 
-    String firstname;
-    String lastname;
-    final String emailAdd;
-    final String phoneNo;
+public abstract class Person {
+
+    private String firstname;
+    private String lastname;
+    private final String emailAdd;
+    private final String phoneNo;
 
    public Person (String firstname, String lastname, String emailAdd, String phoneNo){
     this.firstname = firstname;

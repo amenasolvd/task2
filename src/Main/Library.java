@@ -1,25 +1,66 @@
+package Main;
+
+import Items.Item;
+import Items.Book;
+import Items.Magazine;
+import Items.Newspaper;
+import Peoples.Member;
+import Peoples.Staff;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.List;
 
 public class Library {
-    final String lib_name;
-    final String address;
-    final String phone;
-    final String website;
+
+    private final String libraryName;
+    private final String address;
+    private final String phone;
+    private final String website;
     ArrayList<Book> bookList = new ArrayList<>();
     ArrayList<Magazine> magazineList = new ArrayList<>();
     ArrayList<Member> memberList = new ArrayList<>();
     ArrayList<Staff> staffList = new ArrayList<>();
     ArrayList<Newspaper> newspaper = new ArrayList<>();
 
-    public Library(String lib_name, String address, String phone, String website ) {
-        this.lib_name = lib_name;
+    public Library(String libraryName, String address, String phone, String website) {
+
+        this.libraryName = libraryName;
         this.address = address;
         this.phone = phone;
         this.website = website;
-       }
+    }
 
-    //getters and setters
+    public String getLibraryName() {
+        return libraryName;
+    }
+
+    public void setLibraryName() {
+        return;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress() {
+        return;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone() {
+        return;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite() {
+        return;
+    }
+
     public ArrayList<Member> getMemberList() {
         return memberList;
     }
@@ -60,15 +101,36 @@ public class Library {
         this.newspaper = newspaper;
     }
 
-    //method to add member
-    public ArrayList<Member>addMember(ArrayList<Member>memberList){
+    public void addMember(Member member) {
         this.memberList.add(member);
-        return memberList;
+        return;
     }
 
-    //method to delete member
-    public ArrayList<Member>deleteMember(ArrayList<Member> memberList){
-        this.memberList.remove(new Member("","","","",""));
-        return memberList;
+    public void deleteMember(Member member) {
+        this.memberList.remove(member);
+        return;
     }
- }
+
+    public void libraryInfo() {
+        System.out.println("Library Name: " + libraryName + '\'' +
+                "Library address: " + address + '\'' +
+                "Phone Number: " + phone + "\'" +
+                "Website: " + website + '\'');
+        return;
+    }
+
+    public void allBookInfo() {
+        for (int i = 0; i < bookList.size(); i++) {
+            System.out.print(bookList.get(i));
+        }
+    }
+
+ /*   public Book searchBookByName(Item item) {
+        for (int i = 0; i < bookList.size(); i++) {
+            if (item.getTitle().equals(bookList.get(i).getTitle())) {
+                return bookList.get(i);
+            }
+        }
+        return bookList;
+    } */
+}

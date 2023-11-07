@@ -1,7 +1,12 @@
+package Items;
+
 public class Newspaper extends Item {
-    final int published_date;
-    Newspaper(String title,int published_date){
+
+    final int publishedDate;
+
+    public Newspaper(String title,int publishedDate){
+
         super(title);
-        this.published_date =published_date;
+        this.publishedDate =publishedDate;
     }
 }

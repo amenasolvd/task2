@@ -1,28 +1,29 @@
+package Items;
 public class Book extends Item {
-    final String isbn_no;
-    String item_Id;
-    final String author;
-    final String genre;
-    final String publication;
+    private final String isbnNo;
+    private String itemId;
+    private final String author;
+    private final String genre;
+    private final String publication;
 
-    Book(String title, String isbn_no, String item_Id, String author, String genre, String publication) {
+    public Book(String title, String isbnNo, String itemId, String author, String genre, String publication) {
+
         super(title);
-        this.isbn_no = isbn_no;
-        this.item_Id = item_Id;
+        this.isbnNo = isbnNo;
+        this.itemId = itemId;
         this.author = author;
         this.genre = genre;
         this.publication = publication;
     }
 
-    //getters and setters
-    public String getItem_Id(){
-        return item_Id;
-    }
-    public void setItem_Id(){
-        this.item_Id = item_Id;
+    public String getItemId(){
+        return itemId;
     }
 
-    //overriding equals method
+    public void setItemId(){
+        this.itemId = itemId;
+    }
+
     @Override
     public boolean equals(Object input) {
         if (this == input) {
@@ -32,24 +33,22 @@ public class Book extends Item {
             return false;
         }
         if (!(input instanceof Book)) {
-            String bookNo = ((Book) input).getItem_Id();
-            if (bookNo != null && bookNo.equals(this.item_Id)) {
+            String bookNo = ((Book) input).getItemId();
+            if (bookNo != null && bookNo.equals(this.itemId)) {
                 return true;
             }
         }
         return false;
     }
 
-    //overriding hashcode() method
     @Override
     public int hashCode() {
-        return this.item_Id.hashCode();
+        return this.itemId.hashCode();
     }
 
-    //overriding toString method
     @Override
     public String toString() {
-        return "Name: " + title + ", ISBN No: " + isbn_no + ", Item ID: " + item_Id
+        return "Name: " + getTitle()  + ", ISBN No: " + isbnNo + ", Item ID: " + itemId
                 + "Author: " + author + "Genre: " + genre + "Publication: " + publication;
     }
 }

@@ -1,61 +1,51 @@
-Package Peoples;
+package Peoples;
+
 import java.util.ArrayList;
-import Peoples.member;
+import Items.Item;
+import Items.Magazine;
+import Peoples.Member;
+import Items.Book;
+import Main.Library;
 
 public class Librarian extends Staff {
 
-    ArrayList<Book> bookList = new ArrayList<>();
-    ArrayList<Magazine> magazineList = new ArrayList<>();
-    ArrayList<Member> memberList = new ArrayList<>();
-    int myBook = 0;
+    private ArrayList<Book> bookList = new ArrayList<>();
+    private ArrayList<Magazine> magazineList = new ArrayList<>();
+    private ArrayList<Member> memberList = new ArrayList<>();
 
     public Librarian(String firstname, String lastname, String email_add, String phone_no,
                      String employee_ID, String designation, String department) {
+
         super(firstname, lastname, email_add, phone_no, employee_ID, designation, department);
     }
 
-    //method to issue book
-    public Boolean issue(Member member, Item item) {
-        member.addItem();
-        if(member.getIssuedBook().bookCount()>=3) {
-            System.out.println("you can't issue this book");
-            return false;
-        }
-        else{
-            member.addItem(item);
-            return true;
+    public Boolean issue(Member member, Book book) {
+        if (member.getAddIssuedBooks() >= 3) {
+        System.out.println("you can't issue this book");
+        return false;
+        } else {
+        member.addIssuedBook(book);
+        bookList.remove(book);
+        return true;
         }
 
     }
 
-    //getters and setters
-    public int getMyBook() {
-        return myBook;
-    }
-
-    public void setMyBook(int myBook) {
-        this.myBook = myBook;
-    }
-
-    //method to reissue book
     public Boolean reissue(Member member, Book book) {
-        if (this.issue() == true) {
-            this.issue();
+        int reissueCount = 0;
+        if(this.issue(member, book) == true && reissueCount < 1){
+        reissueCount++;
         }
+        this.issue(member,book);
         return true;
     }
 
-    //method to reissue book
-    public Boolean returnBook() {
-        if (this.issue() == true) {
-            Manager manager = new Manager("", "", "", "", "", "", "");
-            Book book = new Book("", "", "", "", "", "");
-            Member member = new Member("", "", "", "", "");
-            manager.addBook(book);
-            this.myBook--;
-            return true;
-        } else {
-            return false;
-        }
+    public Boolean returnBook(Member member, Book book) {
+       if (member.issuedBook.equals(book)){
+       bookList.add(book);
+       member.issuedBook.remove(book);
+       return true;
+       }
+       return false;
     }
 }

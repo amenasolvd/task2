@@ -1,11 +1,18 @@
+package Peoples;
+import Items.Item;
 import java.util.List;
+import java.util.Objects;
+
+import Main.Library;
+import Items.Book;
 
 public class Member extends Person {
     private String libraryCardId;
     private int bookCount;
-
+    List<Book>issuedBook;
     public Member(String firstname, String lastname, String email_add, String phone_no, String cardID) {
         super(firstname, lastname, email_add, phone_no);
+
         libraryCardId = cardID;
     }
 
@@ -38,39 +45,21 @@ public class Member extends Person {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null) {
-            return false;
-        }
-        if (!(object instanceof Member)) {
-            String phone = ((Member) object).getPhoneNo();
-            if (phone != null && phone.equals(this.phoneNo)){
-                System.out.println("This is registered member");
-                return false;
-            }
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Member member)) return false;
+        return Objects.equals(getLibraryCardId(), member.getLibraryCardId());
     }
 
     @Override
     public int hashCode() {
-        return this.phoneNo.hashCode();
+        return Objects.hash(getLibraryCardId());
     }
 
-    @Override
-    public String toString() {
-        return "Name: " + firstname + " " + lastname + "Phone number: : " + phoneNo
-                + "Email Address:  " + emailAdd + "LibraryCard ID: " + libraryCardId;
+    public void addIssuedBook(Book book){
+        issuedBook.add(book);
     }
-    
-    public void addItem(Item item){
-        List<Item>issuedItems = null;
-        issuedItems.add(Item);
+    public int getAddIssuedBooks(){
+        return bookCount;
     }
-    public int getIssuedBook(){
-
-    }
-    }
+}
