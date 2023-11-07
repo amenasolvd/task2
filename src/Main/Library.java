@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Vector;
+
 public class Library {
     final String lib_name;
     final String address;
@@ -60,7 +62,7 @@ public class Library {
 
     //method to add member
     public ArrayList<Member>addMember(ArrayList<Member>memberList){
-        this.memberList.add(new Member("","","","",""));
+        this.memberList.add(member);
         return memberList;
     }
 
@@ -69,4 +71,4 @@ public class Library {
         this.memberList.remove(new Member("","","","",""));
         return memberList;
     }
-}
+ }

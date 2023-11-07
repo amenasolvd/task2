@@ -1,12 +1,14 @@
+import java.util.List;
+
 public class Member extends Person {
-    String libraryCardId;
-    int myBooks;
+    private String libraryCardId;
+    private int bookCount;
+
     public Member(String firstname, String lastname, String email_add, String phone_no, String cardID) {
         super(firstname, lastname, email_add, phone_no);
         libraryCardId = cardID;
     }
 
-    //getters and setters
     public String getLibraryCardId() {
         return libraryCardId;
     }
@@ -26,15 +28,14 @@ public class Member extends Person {
     }
 
     @Override
-    public String getPhone_no() {
-        return super.getPhone_no();
+    public String getPhoneNo() {
+        return super.getPhoneNo();
     }
 
     @Override
-    public String getEmail_add() {
-        return super.getEmail_add();
+    public String getEmailAdd() {
+        return super.getEmailAdd();
     }
-    //override equals method for member.phone_no
 
     @Override
     public boolean equals(Object object) {
@@ -45,26 +46,31 @@ public class Member extends Person {
             return false;
         }
         if (!(object instanceof Member)) {
-            String phone = ((Member) object).getPhone_no();
-            if (phone != null && phone.equals(this.phone_no)){
+            String phone = ((Member) object).getPhoneNo();
+            if (phone != null && phone.equals(this.phoneNo)){
                 System.out.println("This is registered member");
                 return false;
             }
         }
         return true;
     }
-    //overriding hashcode() for member.phone_no
 
     @Override
     public int hashCode() {
-        return this.phone_no.hashCode();
+        return this.phoneNo.hashCode();
     }
 
-    //overriding toString method to get member details.
     @Override
     public String toString() {
-        return "Name: " + firstname + " " + lastname + "Phone number: : " + phone_no
-                + "Email Address:  " + email_add + "LibraryCard ID: " + libraryCardId;
+        return "Name: " + firstname + " " + lastname + "Phone number: : " + phoneNo
+                + "Email Address:  " + emailAdd + "LibraryCard ID: " + libraryCardId;
     }
+    
+    public void addItem(Item item){
+        List<Item>issuedItems = null;
+        issuedItems.add(Item);
+    }
+    public int getIssuedBook(){
 
+    }
     }

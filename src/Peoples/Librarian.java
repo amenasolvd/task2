@@ -1,27 +1,30 @@
+Package Peoples;
 import java.util.ArrayList;
+import Peoples.member;
+
 public class Librarian extends Staff {
+
     ArrayList<Book> bookList = new ArrayList<>();
     ArrayList<Magazine> magazineList = new ArrayList<>();
     ArrayList<Member> memberList = new ArrayList<>();
     int myBook = 0;
 
-    public Librarian(String firstname, String lastname, String email_add, String phone_no, String employee_ID, String designation, String department) {
+    public Librarian(String firstname, String lastname, String email_add, String phone_no,
+                     String employee_ID, String designation, String department) {
         super(firstname, lastname, email_add, phone_no, employee_ID, designation, department);
     }
 
     //method to issue book
-    public Boolean issue() {
-        Manager manager = new Manager("", "", "", "", "", "", "");
-        Book book = new Book("", "", "", "", "", "");
-        Member member = new Member("", "", "", "", "");
-        if (member.libraryCardId == null) {
+    public Boolean issue(Member member, Item item) {
+        member.addItem();
+        if(member.getIssuedBook().bookCount()>=3) {
+            System.out.println("you can't issue this book");
             return false;
         }
-        if (myBook < 3) {
-            manager.deleteBook(book);
-            myBook++;
+        else{
+            member.addItem(item);
+            return true;
         }
-        return true;
 
     }
 

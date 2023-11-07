@@ -1,14 +1,16 @@
 //Person Class is parent class for Member and Staff class
 public class Person {
+
     String firstname;
     String lastname;
-    final String email_add;
-    final String phone_no;
-   public Person (String firstname, String lastname, String email_add, String phone_no){
+    final String emailAdd;
+    final String phoneNo;
+
+   public Person (String firstname, String lastname, String emailAdd, String phoneNo){
     this.firstname = firstname;
     this.lastname = lastname;
-    this.email_add = email_add;
-    this.phone_no = phone_no;
+    this.emailAdd = emailAdd;
+    this.phoneNo = phoneNo;
     }
     public String getFirstname(){
         this.firstname = firstname;
@@ -26,15 +28,14 @@ public class Person {
         this.lastname = lastname;
     }
 
-    public String getEmail_add(){
-       return email_add;
+    public String getEmailAdd(){
+       return emailAdd;
     }
-    public String getPhone_no(){
-        return phone_no;
-    }
-
-    public String setPhone_no(){
-        return phone_no;
+    public String getPhoneNo(){
+        return phoneNo;
     }
 
+    public String setPhoneNo(){
+        return phoneNo;
+    }
 }
