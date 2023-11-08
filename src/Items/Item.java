@@ -11,10 +11,7 @@ public abstract class Item {
         this.title = title;
     }
 
-    public String getTitle() {
-        return title;
+    public abstract String getTitle();
+
+    public abstract void setTitle();
     }
-    public void setTitle(){
-        return;
-    }
-}

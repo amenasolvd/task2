@@ -1,10 +1,8 @@
 package Peoples;
-import java.util.ArrayList;
 import java.lang.String;
 import Items.Book;
-import Items.Item;
-import Main.Library;
-public class Manager extends Staff {
+import main.Library;
+public final class Manager extends Staff implements IManager{
 
     public Manager(String firstname, String lastname, String email_add,String phone_no,
             String employee_ID, String designation, String department) {
@@ -13,6 +11,7 @@ public class Manager extends Staff {
     }
 
     public void addBook(Library library, Book book){
+
         library.getBookList().add(book);
     }
 

@@ -1,13 +1,10 @@
 package Peoples;
 
 import java.util.ArrayList;
-import Items.Item;
 import Items.Magazine;
-import Peoples.Member;
 import Items.Book;
-import Main.Library;
 
-public class Librarian extends Staff {
+public class Librarian extends Staff implements ILibrarian {
 
     private ArrayList<Book> bookList = new ArrayList<>();
     private ArrayList<Magazine> magazineList = new ArrayList<>();
@@ -28,7 +25,6 @@ public class Librarian extends Staff {
         bookList.remove(book);
         return true;
         }
-
     }
 
     public Boolean reissue(Member member, Book book) {
@@ -41,11 +37,11 @@ public class Librarian extends Staff {
     }
 
     public Boolean returnBook(Member member, Book book) {
-       if (member.issuedBook.equals(book)){
-       bookList.add(book);
-       member.issuedBook.remove(book);
-       return true;
-       }
-       return false;
+        if (member.issuedBook.equals(book)) {
+            bookList.add(book);
+            member.issuedBook.remove(book);
+            return true;
+        }
+        return false;
     }
 }

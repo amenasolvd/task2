@@ -1,12 +1,9 @@
 package Peoples;
-import Items.Item;
 import java.util.List;
 import java.util.Objects;
-
-import Main.Library;
 import Items.Book;
 
-public class Member extends Person {
+public class Member extends Person implements IMember {
     private String libraryCardId;
     private int bookCount;
     List<Book>issuedBook;
@@ -20,28 +17,49 @@ public class Member extends Person {
         return libraryCardId;
     }
 
-    public void setLibraryCardId(String libraryCardId) {
+    @Override
+    public void setLibraryCardId() {
         this.libraryCardId = libraryCardId;
     }
 
     @Override
     public String getFirstname() {
-        return super.getFirstname();
+        super.firstname = firstname;
+        return firstname;
     }
 
-    @Override
+    public void setFirstname(){
+        super.firstname = firstname;
+        return;
+    }
+
     public String getLastname() {
-        return super.getLastname();
+        super.lastname = lastname;
+        return lastname;
     }
 
-    @Override
+    public void setLastname(){
+        super.lastname = lastname;
+        return;
+    }
+
     public String getPhoneNo() {
-        return super.getPhoneNo();
+        super.phoneNo = phoneNo;
+        return phoneNo;
     }
 
-    @Override
+    public void setPhoneNo(){
+        super.phoneNo = phoneNo;
+        return;
+    }
+
     public String getEmailAdd() {
-        return super.getEmailAdd();
+        return super.emailAdd = emailAdd;
+    }
+
+    public void setEmailAdd(){
+        super.emailAdd = emailAdd;
+        return;
     }
 
     @Override
@@ -56,9 +74,10 @@ public class Member extends Person {
         return Objects.hash(getLibraryCardId());
     }
 
-    public void addIssuedBook(Book book){
+    public void addIssuedBook(Book book) {
         issuedBook.add(book);
     }
+
     public int getAddIssuedBooks(){
         return bookCount;
     }

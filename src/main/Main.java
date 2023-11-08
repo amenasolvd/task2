@@ -1,8 +1,8 @@
-package Main;
+package main;
 
 import Items.*;
 import Peoples.*;
-
+import main.Library;
 public class Main {
     public static void main(String[] args) {
         Person[] person = new Person[5];
@@ -12,13 +12,9 @@ public class Main {
         member[1] = new Member("Aiza", "Kureshi", "aiza_kureshi@gmail.com",
                 "3356784521", "146623");
         Staff[] staff = new Staff[2];
-        staff[0] = new Staff("Rida", "Sheikh", "rida_sheikh@gmail.com",
-                "9945623567", "1234506789", "Peoples.Librarian", "Management");
-        staff[1] = new Staff("zayaan", "Sheikh", "rida_sheikh@gmail.com",
-                "9935623567", "1234606789", "Peoples.Manager", "Management");
         Librarian librarian = new Librarian("Rida", "Sheikh", "rida_sheikh@gmail.com",
                 "9945623567", "1234506789", "Peoples.Librarian", "admin");
-        Manager manager = new Manager("zayaan", "Sheikh", "rida_sheikh@gmail.com",
+        Manager manager = new Manager("zayaan", "Sheikh", "zayaan_sheikh@gmail.com",
                 "9945623567", "1234506789", "Peoples.Librarian", "admin");
         Item[] item = new Item[5];
         Book[] book = new Book[2];
@@ -35,9 +31,8 @@ public class Main {
                 "Peru, Ill.", "Children's literature");
         Newspaper[] newspaper = new Newspaper[1];
         newspaper[0] = new Newspaper("Times Now", -2012);
-        Library library = new Library("njh", "nds", "", "");
-        library.libraryInfo();
 
-
-    }
+        Library.allBookInfo();
+        Library.libraryInfo();
+        }
 }

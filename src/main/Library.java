@@ -1,35 +1,36 @@
-package Main;
+package main;
 
-import Items.Item;
 import Items.Book;
 import Items.Magazine;
 import Items.Newspaper;
 import Peoples.Member;
 import Peoples.Staff;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-public class Library {
-
-    private final String libraryName;
-    private final String address;
-    private final String phone;
-    private final String website;
-    ArrayList<Book> bookList = new ArrayList<>();
-    ArrayList<Magazine> magazineList = new ArrayList<>();
-    ArrayList<Member> memberList = new ArrayList<>();
-    ArrayList<Staff> staffList = new ArrayList<>();
-    ArrayList<Newspaper> newspaper = new ArrayList<>();
-
-    public Library(String libraryName, String address, String phone, String website) {
-
-        this.libraryName = libraryName;
-        this.address = address;
-        this.phone = phone;
-        this.website = website;
+public class Library{
+    private static String libraryName = "Billerica Public Library";
+    private static String website = "https://billericalibrary.org/";
+    private static String address = "15 Concord Rd, Billerica, MA 01821";
+    private static String phone = "(978) 671-0949";
+    private static ArrayList<Book> bookList;
+    private  static ArrayList<Magazine> magazineList;
+    private static ArrayList<Member> memberList;
+    private static ArrayList<Staff> staffList;
+    private static ArrayList<Newspaper> newspaper;
+    static{
+        bookList = new ArrayList<>();
+        magazineList = new ArrayList<>();
+        memberList = new ArrayList<>();
+        staffList = new ArrayList<>();
+        newspaper = new ArrayList<>();
     }
 
-    public String getLibraryName() {
+    public Library(String libraryName, String address, String emailAdd, String phone, String website ) {
+
+    }
+
+    public static String getLibraryName() {
         return libraryName;
     }
 
@@ -37,7 +38,7 @@ public class Library {
         return;
     }
 
-    public String getAddress() {
+    public static String getAddress() {
         return address;
     }
 
@@ -111,7 +112,7 @@ public class Library {
         return;
     }
 
-    public void libraryInfo() {
+    public static void libraryInfo() {
         System.out.println("Library Name: " + libraryName + '\'' +
                 "Library address: " + address + '\'' +
                 "Phone Number: " + phone + "\'" +
@@ -119,9 +120,26 @@ public class Library {
         return;
     }
 
-    public void allBookInfo() {
-        for (int i = 0; i < bookList.size(); i++) {
-            System.out.print(bookList.get(i));
+    @Override
+    public String toString() {
+        String total = "\n";
+        for(int i = 0; i<memberList.size();i++){
+            Member m = memberList.get(i);
+            total = total + m.toString();
+            System.out.println(total);
         }
+        return total;
+    }
+
+    public static String allBookInfo() {
+        String total = "\n";
+        Iterator i = bookList.iterator();
+        while(i.hasNext()){
+            Book b = (Book)i.next();
+            total = total+b;
+            System.out.println(total);
+            System.out.println("hello world");
+        }
+        return total;
     }
 }

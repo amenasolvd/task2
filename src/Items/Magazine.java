@@ -1,63 +1,76 @@
 package Items;
 
 import java.util.Objects;
-public class Magazine extends Item {
-    final String item_Id;
-    final String publication;
-    final String category;
+public class Magazine extends Item implements IMagazine {
+    private String itemId;
+    private String publication;
+    private String category;
 
-    public Magazine(String title, String item_Id, String publication, String category) {
+    public Magazine(String title, String itemId, String publication, String category) {
 
         super(title);
-        this.item_Id = item_Id;
+        this.itemId = itemId;
         this.publication = publication;
         this.category = category;
     }
 
-    //getters and setters
-    public String getItem_Id() {
-        return item_Id;
+    @Override
+    public String getTitle() {
+        return null;
     }
 
-    public void setItem_Id() {
+    @Override
+    public void setTitle() {
+
+    }
+
+    public String getItemId() {
+        this.itemId = itemId;
+        return itemId;
+    }
+
+    public void setItemId() {
+
         return;
     }
 
     public String getPublication() {
+        this.publication = publication;
         return publication;
     }
 
     public void setPublication() {
+
         return;
     }
 
     public String getCategory() {
+        this.category = category;
         return category;
     }
 
     public void setCategory() {
+
         return;
     }
 
-    //overriding equals method for item_Id
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Magazine magazine)) return false;
-        return Objects.equals(getItem_Id(), magazine.getItem_Id());
+        return Objects.equals(getItemId(), magazine.getItemId());
     }
 
-    //overriding hashcode() for item_Id
     @Override
     public int hashCode() {
-        return Objects.hash(getItem_Id());
+        return Objects.hash(getItemId());
     }
 
     //overriding toString method for magazine info
     @Override
     public String toString() {
         return "Items.Magazine{" +
-                "item_Id='" + item_Id + '\'' +
+                "item_Id='" + itemId + '\'' +
                 ", publication='" + publication + '\'' +
                 ", category='" + category + '\'' +
                 '}';
