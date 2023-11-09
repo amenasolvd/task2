@@ -2,9 +2,15 @@ package main;
 
 import Items.*;
 import Peoples.*;
-import main.Library;
+import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Main {
+
+    private static Logger log = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
+
         Person[] person = new Person[5];
         Member[] member = new Member[2];
         member[0] = new Member("Ahil", "Khan", "ahil_khan@gmail.com",
@@ -34,5 +40,8 @@ public class Main {
 
         Library.allBookInfo();
         Library.libraryInfo();
+        log.debug("Debug Message Logged !!!");
+        log.info("Info Message Logged !!!");
+        log.error("Error Message Logged !!!", new NullPointerException("NullError"));
         }
 }
