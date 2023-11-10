@@ -1,33 +1,25 @@
 package main;
 
-import Items.Book;
-import Items.Magazine;
-import Items.Newspaper;
-import Peoples.Member;
-import Peoples.Staff;
-import java.util.ArrayList;
-import java.util.Iterator;
+import items.Book;
+import items.Magazine;
+import items.Newspaper;
+import peoples.Member;
+import peoples.Staff;
 
-public class Library{
-    private static String libraryName = "Billerica Public Library";
-    private static String website = "https://billericalibrary.org/";
-    private static String address = "15 Concord Rd, Billerica, MA 01821";
-    private static String phone = "(978) 671-0949";
+import java.util.ArrayList;
+
+public class Library implements LibraryInterface {
+    private static final String libraryName = "Billerica Public Library";
+    private static final String website = "https://billericalibrary.org/";
+    private static final String address = "15 Concord Rd, Billerica, MA 01821";
+    private static final String phone = "(978) 671-0949";
     private static ArrayList<Book> bookList;
-    private  static ArrayList<Magazine> magazineList;
+    private static ArrayList<Magazine> magazineList;
     private static ArrayList<Member> memberList;
     private static ArrayList<Staff> staffList;
     private static ArrayList<Newspaper> newspaper;
-    static{
-        bookList = new ArrayList<>();
-        magazineList = new ArrayList<>();
-        memberList = new ArrayList<>();
-        staffList = new ArrayList<>();
-        newspaper = new ArrayList<>();
-    }
 
-    public Library(String libraryName, String address, String emailAdd, String phone, String website ) {
-
+    public Library() {
     }
 
     public static String getLibraryName() {
@@ -35,7 +27,6 @@ public class Library{
     }
 
     public void setLibraryName() {
-        return;
     }
 
     public static String getAddress() {
@@ -43,23 +34,14 @@ public class Library{
     }
 
     public void setAddress() {
-        return;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone() {
-        return;
-    }
-
     public String getWebsite() {
         return website;
-    }
-
-    public void setWebsite() {
-        return;
     }
 
     public ArrayList<Member> getMemberList() {
@@ -102,44 +84,77 @@ public class Library{
         this.newspaper = newspaper;
     }
 
+    public void addBook(Book book) {
+        getBookList().add(book);
+    }
+
+    public boolean deleteBook(Book book, Staff staff) {
+        if (staff.getDesignation().equals("Manager")) {
+            if (this.getBookList().contains(book.getItemId())) {
+                getBookList().remove(book);
+            }
+            return true;
+        } else {
+            System.out.println("You are not authorized to delete book");
+            return false;
+        }
+    }
+
     public void addMember(Member member) {
-        this.memberList.add(member);
-        return;
+        getMemberList().add(member);
     }
 
-    public void deleteMember(Member member) {
-        this.memberList.remove(member);
-        return;
+    public final boolean deleteMember(Staff staff, Member member) {
+        if (staff.getDesignation().equals("Manager")) {
+            if (this.getMemberList().contains(member.getLibraryCardId())) {
+                getMemberList().remove(member);
+            }
+            return true;
+        } else {
+            System.out.println("You are not authorized to delete member");
+            return false;
+        }
     }
 
-    public static void libraryInfo() {
+    public Boolean issue(Member member, Book book) {
+        if (member.getAddIssuedBooks() >= 3) {
+            System.out.println("you can't issue this book");
+            return false;
+        } else {
+            member.addIssuedBook(book);
+            bookList.remove(book);
+            return true;
+        }
+    }
+
+    public Boolean reissue(Member member, Book book) {
+        int reissueCount = 0;
+        if (this.issue(member, book)) {
+            reissueCount++;
+        }
+        this.issue(member, book);
+        return true;
+    }
+
+    public Boolean returnBook(Member member, Book book) {
+        if (member.issuedBook.equals(book)) {
+            bookList.add(book);
+            member.issuedBook.remove(book);
+            return true;
+        }
+        return false;
+    }
+
+    public static void printLibraryInfo() {
         System.out.println("Library Name: " + libraryName + '\'' +
                 "Library address: " + address + '\'' +
                 "Phone Number: " + phone + "\'" +
                 "Website: " + website + '\'');
-        return;
     }
 
-    @Override
-    public String toString() {
-        String total = "\n";
-        for(int i = 0; i<memberList.size();i++){
-            Member m = memberList.get(i);
-            total = total + m.toString();
-            System.out.println(total);
+    public static void printBookInfo(Book book) {
+        for (Book i : bookList) {
+            System.out.println("BookList : " + book);
         }
-        return total;
-    }
-
-    public static String allBookInfo() {
-        String total = "\n";
-        Iterator i = bookList.iterator();
-        while(i.hasNext()){
-            Book b = (Book)i.next();
-            total = total+b;
-            System.out.println(total);
-            System.out.println("hello world");
-        }
-        return total;
     }
 }

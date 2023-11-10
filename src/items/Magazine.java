@@ -1,13 +1,14 @@
-package Items;
+package items;
 
 import java.util.Objects;
-public class Magazine extends Item implements IMagazine {
-    private String itemId;
+
+public class Magazine extends Item {
+
+    private int itemId;
     private String publication;
     private String category;
 
-    public Magazine(String title, String itemId, String publication, String category) {
-
+    public Magazine(String title, int itemId, String publication, String category) {
         super(title);
         this.itemId = itemId;
         this.publication = publication;
@@ -20,18 +21,13 @@ public class Magazine extends Item implements IMagazine {
     }
 
     @Override
-    public void setTitle() {
-
+    public void setTitle(String title) {
+        super.setTitle(title);
     }
 
-    public String getItemId() {
+    public int getItemId() {
         this.itemId = itemId;
         return itemId;
-    }
-
-    public void setItemId() {
-
-        return;
     }
 
     public String getPublication() {
@@ -40,8 +36,6 @@ public class Magazine extends Item implements IMagazine {
     }
 
     public void setPublication() {
-
-        return;
     }
 
     public String getCategory() {
@@ -50,8 +44,6 @@ public class Magazine extends Item implements IMagazine {
     }
 
     public void setCategory() {
-
-        return;
     }
 
     @Override
@@ -66,10 +58,9 @@ public class Magazine extends Item implements IMagazine {
         return Objects.hash(getItemId());
     }
 
-    //overriding toString method for magazine info
     @Override
     public String toString() {
-        return "Items.Magazine{" +
+        return "items.Magazine{" +
                 "item_Id='" + itemId + '\'' +
                 ", publication='" + publication + '\'' +
                 ", category='" + category + '\'' +
