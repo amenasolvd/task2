@@ -8,19 +8,4 @@ public final class Manager extends Staff {
                    int employeeID, String designation, String department) {
         super(firstname, lastname, email, phoneNo, employeeID, designation, department);
     }
-
-    @Override
-    public int getEmployeeID() {
-        return super.getEmployeeID();
-    }
-
-    @Override
-    public String getEmail() {
-        return null;
-    }
-
-    @Override
-    public void setEmail() {
-
-    }
 }

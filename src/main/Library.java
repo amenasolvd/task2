@@ -8,7 +8,7 @@ import peoples.Staff;
 
 import java.util.ArrayList;
 
-public class Library implements LibraryInterface {
+public class Library implements ILibrary {
     private static final String libraryName = "Billerica Public Library";
     private static final String website = "https://billericalibrary.org/";
     private static final String address = "15 Concord Rd, Billerica, MA 01821";
@@ -20,28 +20,6 @@ public class Library implements LibraryInterface {
     private static ArrayList<Newspaper> newspaper;
 
     public Library() {
-    }
-
-    public static String getLibraryName() {
-        return libraryName;
-    }
-
-    public void setLibraryName() {
-    }
-
-    public static String getAddress() {
-        return address;
-    }
-
-    public void setAddress() {
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getWebsite() {
-        return website;
     }
 
     public ArrayList<Member> getMemberList() {

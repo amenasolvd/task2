@@ -4,14 +4,10 @@ import java.util.Objects;
 
 public class Magazine extends Item {
 
-    private int itemId;
-    private String publication;
     private String category;
 
-    public Magazine(String title, int itemId, String publication, String category) {
-        super(title);
-        this.itemId = itemId;
-        this.publication = publication;
+    public Magazine(String category, String title, int itemId, String publication) {
+        super(title, itemId, publication);
         this.category = category;
     }
 
@@ -25,17 +21,23 @@ public class Magazine extends Item {
         super.setTitle(title);
     }
 
+    @Override
     public int getItemId() {
-        this.itemId = itemId;
-        return itemId;
+        return super.getItemId();
     }
 
+    @Override
     public String getPublication() {
-        this.publication = publication;
-        return publication;
+        return super.getPublication();
     }
 
-    public void setPublication() {
+    @Override
+    public void setPublication(String publication) {
+        super.setPublication(publication);
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getCategory() {
@@ -60,10 +62,8 @@ public class Magazine extends Item {
 
     @Override
     public String toString() {
-        return "items.Magazine{" +
-                "item_Id='" + itemId + '\'' +
-                ", publication='" + publication + '\'' +
-                ", category='" + category + '\'' +
-                '}';
+        return "Magazine{" +
+                "category='" + category + '\'' +
+                "} " + super.toString();
     }
 }

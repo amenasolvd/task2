@@ -7,15 +7,15 @@ import items.Book;
 
 public class Member extends Person {
 
-    double a = Math.random();
-    int b = (int) (a + 1000);
-    private int libraryCardId = b + 10;
+    private int libraryCardId;
     public List<Book> issuedBook;
-    private int bookCount;
 
-    public Member(String firstname, String lastname, String email, String phoneNo, int cardID) {
+    public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
-        libraryCardId = cardID;
+        double a = Math.random();
+        int b = (int) (a + 1000);
+        cardId = b+10;
+        this.libraryCardId = cardId;
     }
 
     public int getLibraryCardId() {
@@ -24,44 +24,46 @@ public class Member extends Person {
 
     @Override
     public String getFirstname() {
-        return null;
+        return this.firstname;
     }
 
     @Override
-    public void setFirstname() {
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     @Override
     public String getLastname() {
-        return null;
+        return this.lastname;
     }
 
     @Override
-    public void setLastname() {
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return this.email;
     }
 
     @Override
-    public void setEmail() {
+    public void setEmail(String email) {
+       this.email = email;
     }
 
     @Override
     public String getPhoneNo() {
-        return null;
+        return this.phoneNo;
     }
 
     public List<Book> addIssuedBook(Book book) {
         issuedBook.add(book);
-        bookCount++;
         return issuedBook;
     }
 
     public int getAddIssuedBooks() {
-        return bookCount;
+        return issuedBook.size();
     }
 
     @Override
@@ -81,7 +83,6 @@ public class Member extends Person {
         return "Member{" +
                 "libraryCardId=" + libraryCardId +
                 ", issuedBook=" + issuedBook +
-                ", bookCount=" + bookCount +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +

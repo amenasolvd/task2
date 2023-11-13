@@ -1,14 +1,19 @@
 package items;
 
+import java.util.Objects;
+
 public class Item {
 
-    private String itemId;
+    double a = Math.random();
+    int b = (int) (a + 1000);
+    private int itemId = b;
     private String title;
-    private String genre;
     private String publication;
 
-    public Item(String title) {
+    public Item(String title, int itemId, String publication) {
         this.title = title;
+        this.itemId = itemId;
+        this.publication = publication;
     }
 
     public String getTitle() {
@@ -17,5 +22,38 @@ public class Item {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public String getPublication() {
+        return publication;
+    }
+
+    public void setPublication(String publication) {
+        this.publication = publication;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item item)) return false;
+        return getItemId() == item.getItemId() && Objects.equals(getTitle(), item.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getItemId(), getTitle());
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId=" + itemId +
+                ", title='" + title + '\'' +
+                ", publication='" + publication + '\'' +
+                '}';
     }
 }

@@ -1,66 +1,59 @@
 package peoples;
 
+import java.util.Objects;
+
 public class Staff extends Person {
 
-    private double a = Math.random();
-    private int b = (int) (a + 1000);
-    private int employeeID = b;
+    private int employeeID;
     private String designation;
     private String department;
 
     public Staff(String firstname, String lastname, String email, String phoneNo,
                  int employeeID, String designation, String department) {
         super(firstname, lastname, email, phoneNo);
+        double a = Math.random();
+        int b = (int) (a + 1000);
+        employeeID = b;
         this.employeeID = employeeID;
         this.designation = designation;
         this.department = department;
     }
 
     public String getFirstname() {
-        super.firstname = firstname;
-        return firstname;
+        return this.firstname;
     }
 
-    public void setFirstname() {
-        super.firstname = firstname;
-        return;
+    @Override
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
+
 
     public String getLastname() {
-        super.lastname = lastname;
-        return lastname;
+        return this.lastname;
     }
 
-    public void setLastname() {
-        super.lastname = lastname;
-        return;
+    @Override
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPhoneNo() {
-        super.phoneNo = phoneNo;
-        return phoneNo;
+        return this.phoneNo;
     }
 
-    public void setPhoneNo() {
-        super.phoneNo = phoneNo;
-        return;
-    }
-
+    @Override
     public String getEmail() {
-        return super.email = email;
+        return this.email;
     }
 
-    public void setEmail() {
-        super.email = email;
-        return;
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getEmployeeID() {
         return employeeID;
-    }
-
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
     }
 
     public String getDesignation() {
@@ -69,5 +62,31 @@ public class Staff extends Person {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Staff staff)) return false;
+        return getEmployeeID() == staff.getEmployeeID() && Objects.equals(getDesignation(), staff.getDesignation())
+                && Objects.equals(department, staff.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmployeeID(), getDesignation(), department);
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "employeeID=" + employeeID +
+                ", designation='" + designation + '\'' +
+                ", department='" + department + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                "} " + super.toString();
     }
 }
