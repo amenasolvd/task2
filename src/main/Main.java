@@ -1,23 +1,14 @@
 package main;
 
-import items.Book;
-import items.Item;
-import items.Magazine;
-import items.Newspaper;
-import main.Library;
+import items.*;
+import peoples.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import peoples.Librarian;
-import peoples.Manager;
-import peoples.Member;
-import peoples.Staff;
 
 public class Main {
-
     private final static Logger log = LogManager.getLogger(main.Main.class);
 
     public static void main(String[] args) {
-
         Member[] member = new Member[2];
         Staff[] staff = new Staff[2];
         Manager[] manager = new Manager[1];
@@ -34,5 +25,6 @@ public class Main {
         log.debug("Debug Message Logged !!!");
         log.info("Info Message Logged !!!");
         log.error("Error Message Logged !!!", new NullPointerException("NullError"));
+        System.out.println("Hello world!");
     }
 }
