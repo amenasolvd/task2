@@ -7,14 +7,12 @@ import items.Book;
 
 public class Member extends Person {
 
-    private int libraryCardId;
+    private final int libraryCardId;
     public List<Book> issuedBook;
 
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
-        double a = Math.random();
-        int b = (int) (a + 1000);
-        cardId = b+10;
+        cardId = (int) (Math.random() + 10000);
         this.libraryCardId = cardId;
     }
 

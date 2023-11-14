@@ -13,31 +13,6 @@ public class Book extends Item {
         this.genre = genre;
     }
 
-    @Override
-    public String getTitle() {
-        return null;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        super.setTitle(title);
-    }
-
-    @Override
-    public int getItemId() {
-        return super.getItemId();
-    }
-
-    @Override
-    public String getPublication() {
-        return super.getPublication();
-    }
-
-    @Override
-    public void setPublication(String publication) {
-        super.setPublication(publication);
-    }
-
     public String getIsbnNo() {
         return isbnNo;
     }

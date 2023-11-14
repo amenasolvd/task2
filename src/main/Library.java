@@ -94,7 +94,7 @@ public class Library implements ILibrary {
         }
     }
 
-    public Boolean issue(Member member, Book book) {
+    public boolean issue(Member member, Book book) {
         if (member.getAddIssuedBooks() >= 3) {
             System.out.println("you can't issue this book");
             return false;
@@ -105,7 +105,7 @@ public class Library implements ILibrary {
         }
     }
 
-    public Boolean reissue(Member member, Book book) {
+    public boolean reissue(Member member, Book book) {
         int reissueCount = 0;
         if (this.issue(member, book)) {
             reissueCount++;
@@ -114,7 +114,7 @@ public class Library implements ILibrary {
         return true;
     }
 
-    public Boolean returnBook(Member member, Book book) {
+    public boolean returnBook(Member member, Book book) {
         if (member.issuedBook.equals(book)) {
             bookList.add(book);
             member.issuedBook.remove(book);

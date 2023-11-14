@@ -25,6 +25,5 @@ public class Main {
         log.debug("Debug Message Logged !!!");
         log.info("Info Message Logged !!!");
         log.error("Error Message Logged !!!", new NullPointerException("NullError"));
-        System.out.println("Hello world!");
     }
 }
