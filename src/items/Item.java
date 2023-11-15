@@ -4,15 +4,14 @@ import java.util.Objects;
 
 public class Item {
 
-    double a = Math.random();
-    int b = (int) (a + 1000);
-    private int itemId = b;
+    private int itemId;
     private String title;
     private String publication;
 
     public Item(String title, int itemId, String publication) {
         this.title = title;
-        this.itemId = itemId;
+        itemId = (int) (Math.random() + 1000);
+        this.itemId =itemId;
         this.publication = publication;
     }
 

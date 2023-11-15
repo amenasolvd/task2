@@ -11,9 +11,7 @@ public class Staff extends Person {
     public Staff(String firstname, String lastname, String email, String phoneNo,
                  int employeeID, String designation, String department) {
         super(firstname, lastname, email, phoneNo);
-        double a = Math.random();
-        int b = (int) (a + 1000);
-        employeeID = b;
+        employeeID = (int) (Math.random() + 1000);
         this.employeeID = employeeID;
         this.designation = designation;
         this.department = department;
