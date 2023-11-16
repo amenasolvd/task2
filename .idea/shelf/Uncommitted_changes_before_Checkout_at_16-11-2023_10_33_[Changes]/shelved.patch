@@ -1,0 +1,393 @@
+Index: src/peoples/Member.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package peoples;\r\n\r\nimport java.util.List;\r\nimport java.util.Objects;\r\n\r\nimport items.Book;\r\n\r\npublic class Member extends Person {\r\n\r\n    private final int libraryCardId;\r\n    public List<Book> issuedBook;\r\n\r\n    public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {\r\n        super(firstname, lastname, email, phoneNo);\r\n        cardId = (int) (Math.random() + 10000);\r\n        this.libraryCardId = cardId;\r\n    }\r\n\r\n    public int getLibraryCardId() {\r\n        return libraryCardId;\r\n    }\r\n\r\n    @Override\r\n    public String getFirstname() {\r\n        return this.firstname;\r\n    }\r\n\r\n    @Override\r\n    public void setFirstname(String firstname) {\r\n        this.firstname = firstname;\r\n    }\r\n\r\n    @Override\r\n    public String getLastname() {\r\n        return this.lastname;\r\n    }\r\n\r\n    @Override\r\n    public void setLastname(String lastname) {\r\n        this.lastname = lastname;\r\n    }\r\n\r\n    @Override\r\n    public String getEmail() {\r\n        return this.email;\r\n    }\r\n\r\n    @Override\r\n    public void setEmail(String email) {\r\n       this.email = email;\r\n    }\r\n\r\n    @Override\r\n    public String getPhoneNo() {\r\n        return this.phoneNo;\r\n    }\r\n\r\n    public List<Book> addIssuedBook(Book book) {\r\n        issuedBook.add(book);\r\n        return issuedBook;\r\n    }\r\n\r\n    public int getAddIssuedBooks() {\r\n        return issuedBook.size();\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (!(o instanceof Member member)) return false;\r\n        return Objects.equals(getLibraryCardId(), member.getLibraryCardId());\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(getLibraryCardId());\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Member{\" +\r\n                \"libraryCardId=\" + libraryCardId +\r\n                \", issuedBook=\" + issuedBook +\r\n                \", firstname='\" + firstname + '\\'' +\r\n                \", lastname='\" + lastname + '\\'' +\r\n                \", email='\" + email + '\\'' +\r\n                \", phoneNo='\" + phoneNo + '\\'' +\r\n                '}';\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/peoples/Member.java b/src/peoples/Member.java
+--- a/src/peoples/Member.java	(revision db2991eed29877258eeb9512bddfb453e1b20d97)
++++ b/src/peoples/Member.java	(date 1700146096533)
+@@ -1,10 +1,9 @@
+ package peoples;
+ 
++import items.Book;
+ import java.util.List;
+ import java.util.Objects;
+ 
+-import items.Book;
+-
+ public class Member extends Person {
+ 
+     private final int libraryCardId;
+@@ -56,8 +55,8 @@
+     }
+ 
+     public List<Book> addIssuedBook(Book book) {
+-        issuedBook.add(book);
+-        return issuedBook;
++            issuedBook.add(book);
++            return issuedBook;
+     }
+ 
+     public int getAddIssuedBooks() {
+Index: src/main/ILibrary.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package main;\r\n\r\nimport items.Book;\r\nimport peoples.Member;\r\nimport peoples.Staff;\r\n\r\npublic interface ILibrary {\r\n\r\n    void addBook(Book book);\r\n    boolean deleteBook(Book book, Staff staff);\r\n    void addMember(Member member);\r\n    boolean deleteMember(Staff staff, Member member);\r\n    boolean issue(Member member, Book book);\r\n    boolean reissue(Member member, Book book);\r\n    boolean returnBook(Member member, Book book);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/ILibrary.java b/src/main/ILibrary.java
+--- a/src/main/ILibrary.java	(revision db2991eed29877258eeb9512bddfb453e1b20d97)
++++ b/src/main/ILibrary.java	(date 1700146096526)
+@@ -1,16 +1,20 @@
+ package main;
+ 
+ import items.Book;
++import main.exceptions.BorrowingBookLimitOver;
++import main.exceptions.PhoneNumberNotValid;
++import main.exceptions.NotAuthorizedForAction;
++import main.exceptions.ReissueNotValid;
+ import peoples.Member;
+ import peoples.Staff;
+ 
+ public interface ILibrary {
+ 
+     void addBook(Book book);
+-    boolean deleteBook(Book book, Staff staff);
+-    void addMember(Member member);
+-    boolean deleteMember(Staff staff, Member member);
+-    boolean issue(Member member, Book book);
+-    boolean reissue(Member member, Book book);
++    boolean deleteBook(Book book, Staff staff) throws NotAuthorizedForAction;
++    void addMember(Member member) throws PhoneNumberNotValid;
++    boolean deleteMember(Staff staff, Member member) throws NotAuthorizedForAction;
++    boolean issue(Member member, Book book) throws BorrowingBookLimitOver;
++    boolean reissue(Member member, Book book) throws ReissueNotValid;
+     boolean returnBook(Member member, Book book);
+ }
+Index: src/main/Library.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package main;\r\n\r\nimport items.Book;\r\nimport items.Magazine;\r\nimport items.Newspaper;\r\nimport peoples.Member;\r\nimport peoples.Staff;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Library implements ILibrary {\r\n    private static final String libraryName = \"Billerica Public Library\";\r\n    private static final String website = \"https://billericalibrary.org/\";\r\n    private static final String address = \"15 Concord Rd, Billerica, MA 01821\";\r\n    private static final String phone = \"(978) 671-0949\";\r\n    private static ArrayList<Book> bookList;\r\n    private static ArrayList<Magazine> magazineList;\r\n    private static ArrayList<Member> memberList;\r\n    private static ArrayList<Staff> staffList;\r\n    private static ArrayList<Newspaper> newspaper;\r\n\r\n    public Library() {\r\n    }\r\n\r\n    public ArrayList<Member> getMemberList() {\r\n        return memberList;\r\n    }\r\n\r\n    public void setMemberList(ArrayList<Member> memberList) {\r\n        this.memberList = memberList;\r\n    }\r\n\r\n    public ArrayList<Staff> getStaffList() {\r\n        return staffList;\r\n    }\r\n\r\n    public void setStaffList(ArrayList<Staff> staffList) {\r\n        this.staffList = staffList;\r\n    }\r\n\r\n    public ArrayList<Book> getBookList() {\r\n        return bookList;\r\n    }\r\n\r\n    public void setBookList(ArrayList<Book> bookList) {\r\n        this.bookList = bookList;\r\n    }\r\n\r\n    public ArrayList<Magazine> getMagazineList() {\r\n        return magazineList;\r\n    }\r\n\r\n    public void setMagazineList(ArrayList<Magazine> magazineList) {\r\n        this.magazineList = magazineList;\r\n    }\r\n\r\n    public ArrayList<Newspaper> getNewspaper() {\r\n        return newspaper;\r\n    }\r\n\r\n    public void setNewspaper(ArrayList<Newspaper> newspaper) {\r\n        this.newspaper = newspaper;\r\n    }\r\n\r\n    public void addBook(Book book) {\r\n        getBookList().add(book);\r\n    }\r\n\r\n    public boolean deleteBook(Book book, Staff staff) {\r\n        if (staff.getDesignation().equals(\"Manager\")) {\r\n            if (this.getBookList().contains(book.getItemId())) {\r\n                getBookList().remove(book);\r\n            }\r\n            return true;\r\n        } else {\r\n            System.out.println(\"You are not authorized to delete book\");\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public void addMember(Member member) {\r\n        getMemberList().add(member);\r\n    }\r\n\r\n    public final boolean deleteMember(Staff staff, Member member) {\r\n        if (staff.getDesignation().equals(\"Manager\")) {\r\n            if (this.getMemberList().contains(member.getLibraryCardId())) {\r\n                getMemberList().remove(member);\r\n            }\r\n            return true;\r\n        } else {\r\n            System.out.println(\"You are not authorized to delete member\");\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public boolean issue(Member member, Book book) {\r\n        if (member.getAddIssuedBooks() >= 3) {\r\n            System.out.println(\"you can't issue this book\");\r\n            return false;\r\n        } else {\r\n            member.addIssuedBook(book);\r\n            bookList.remove(book);\r\n            return true;\r\n        }\r\n    }\r\n\r\n    public boolean reissue(Member member, Book book) {\r\n        int reissueCount = 0;\r\n        if (this.issue(member, book)) {\r\n            reissueCount++;\r\n        }\r\n        this.issue(member, book);\r\n        return true;\r\n    }\r\n\r\n    public boolean returnBook(Member member, Book book) {\r\n        if (member.issuedBook.equals(book)) {\r\n            bookList.add(book);\r\n            member.issuedBook.remove(book);\r\n            return true;\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public static void printLibraryInfo() {\r\n        System.out.println(\"Library Name: \" + libraryName + '\\'' +\r\n                \"Library address: \" + address + '\\'' +\r\n                \"Phone Number: \" + phone + \"\\'\" +\r\n                \"Website: \" + website + '\\'');\r\n    }\r\n\r\n    public static void printBookInfo(Book book) {\r\n        for (Book i : bookList) {\r\n            System.out.println(\"BookList : \" + book);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/Library.java b/src/main/Library.java
+--- a/src/main/Library.java	(revision db2991eed29877258eeb9512bddfb453e1b20d97)
++++ b/src/main/Library.java	(date 1700146096527)
+@@ -3,12 +3,18 @@
+ import items.Book;
+ import items.Magazine;
+ import items.Newspaper;
++import main.exceptions.*;
+ import peoples.Member;
+ import peoples.Staff;
+-
+ import java.util.ArrayList;
++import java.util.Scanner;
++
++import org.apache.logging.log4j.LogManager;
++import org.apache.logging.log4j.Logger;
+ 
+ public class Library implements ILibrary {
++
++    private static final Logger LOG = LogManager.getLogger(main.Library.class);
+     private static final String libraryName = "Billerica Public Library";
+     private static final String website = "https://billericalibrary.org/";
+     private static final String address = "15 Concord Rd, Billerica, MA 01821";
+@@ -22,7 +28,7 @@
+     public Library() {
+     }
+ 
+-    public ArrayList<Member> getMemberList() {
++    public static ArrayList<Member> getMemberList() {
+         return memberList;
+     }
+ 
+@@ -66,38 +72,37 @@
+         getBookList().add(book);
+     }
+ 
+-    public boolean deleteBook(Book book, Staff staff) {
++    public boolean deleteBook(Book book, Staff staff) throws NotAuthorizedForAction {
+         if (staff.getDesignation().equals("Manager")) {
+             if (this.getBookList().contains(book.getItemId())) {
+                 getBookList().remove(book);
+             }
+             return true;
++        }
++        throw new NotAuthorizedForAction("You are not authorized to delete a book");
++    }
++
++    public void addMember(Member member) throws PhoneNumberNotValid {
++        if (member.phoneNo.length() == 10) {
++            getMemberList().add(member);
+         } else {
+-            System.out.println("You are not authorized to delete book");
+-            return false;
++            throw new PhoneNumberNotValid("This is not a valid Phone number");
+         }
+     }
+-
+-    public void addMember(Member member) {
+-        getMemberList().add(member);
+-    }
+ 
+-    public final boolean deleteMember(Staff staff, Member member) {
++    public final boolean deleteMember(Staff staff, Member member) throws NotAuthorizedForAction {
+         if (staff.getDesignation().equals("Manager")) {
+             if (this.getMemberList().contains(member.getLibraryCardId())) {
+                 getMemberList().remove(member);
+             }
+             return true;
+-        } else {
+-            System.out.println("You are not authorized to delete member");
+-            return false;
+-        }
+-    }
+-
+-    public boolean issue(Member member, Book book) {
+-        if (member.getAddIssuedBooks() >= 3) {
+-            System.out.println("you can't issue this book");
+-            return false;
++        }
++        throw new NotAuthorizedForAction("You are not authorized to delete member");
++    }
++
++    public boolean issue(Member member, Book book) throws BorrowingBookLimitOver {
++        if (member.getAddIssuedBooks() > 3) {
++            throw new BorrowingBookLimitOver("You can't issue more than three books");
+         } else {
+             member.addIssuedBook(book);
+             bookList.remove(book);
+@@ -105,13 +110,19 @@
+         }
+     }
+ 
+-    public boolean reissue(Member member, Book book) {
+-        int reissueCount = 0;
+-        if (this.issue(member, book)) {
+-            reissueCount++;
+-        }
+-        this.issue(member, book);
+-        return true;
++    public boolean reissue(Member member, Book book) throws ReissueNotValid {
++        try {
++            int reissueCount = 0;
++            if (this.issue(member, book) == true && reissueCount < 1) {
++                this.issue(member, book);
++                reissueCount++;
++                return true;
++            }
++            throw new ReissueNotValid("Reissue is allowed only once");
++        } catch (BorrowingBookLimitOver e) {
++            LOG.error("Duplicate entry of Issued book");
++            return false;
++        }
+     }
+ 
+     public boolean returnBook(Member member, Book book) {
+@@ -123,6 +134,22 @@
+         return false;
+     }
+ 
++    public static void searchBook(Book book){
++        Scanner sc = new Scanner(System.in);
++        try{
++            LOG.info("search by title");
++            String searchTitle = sc.nextLine();
++            if (searchTitle.isBlank()){
++                throw new InvalidInput("write title of book to search a book");
++            }
++            if(book.getTitle().contains(searchTitle)){
++                LOG.info("Search result:  " + book);
++            } LOG.info("no Book found");
++        } catch(InvalidInput e){
++            LOG.info("Give valid search input");
++        }
++    }
++
+     public static void printLibraryInfo() {
+         System.out.println("Library Name: " + libraryName + '\'' +
+                 "Library address: " + address + '\'' +
+Index: src/main/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package main;\r\n\r\nimport items.*;\r\nimport peoples.*;\r\nimport org.apache.logging.log4j.LogManager;\r\nimport org.apache.logging.log4j.Logger;\r\n\r\npublic class Main {\r\n    private final static Logger log = LogManager.getLogger(main.Main.class);\r\n\r\n    public static void main(String[] args) {\r\n        Member[] member = new Member[2];\r\n        Staff[] staff = new Staff[2];\r\n        Manager[] manager = new Manager[1];\r\n        Librarian[] librarian = new Librarian[1];\r\n        Item[] item = new Item[5];\r\n        Book[] book = new Book[2];\r\n        Magazine[] magazine = new Magazine[2];\r\n        Newspaper[] newspaper = new Newspaper[1];\r\n        Library library = new Library();\r\n        for (Member i : member) {\r\n            System.out.println(member);\r\n        }\r\n        Library.printLibraryInfo();\r\n        log.debug(\"Debug Message Logged !!!\");\r\n        log.info(\"Info Message Logged !!!\");\r\n        log.error(\"Error Message Logged !!!\", new NullPointerException(\"NullError\"));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/Main.java b/src/main/Main.java
+--- a/src/main/Main.java	(revision db2991eed29877258eeb9512bddfb453e1b20d97)
++++ b/src/main/Main.java	(date 1700146096528)
+@@ -2,11 +2,8 @@
+ 
+ import items.*;
+ import peoples.*;
+-import org.apache.logging.log4j.LogManager;
+-import org.apache.logging.log4j.Logger;
+ 
+ public class Main {
+-    private final static Logger log = LogManager.getLogger(main.Main.class);
+ 
+     public static void main(String[] args) {
+         Member[] member = new Member[2];
+@@ -18,12 +15,6 @@
+         Magazine[] magazine = new Magazine[2];
+         Newspaper[] newspaper = new Newspaper[1];
+         Library library = new Library();
+-        for (Member i : member) {
+-            System.out.println(member);
+-        }
+         Library.printLibraryInfo();
+-        log.debug("Debug Message Logged !!!");
+-        log.info("Info Message Logged !!!");
+-        log.error("Error Message Logged !!!", new NullPointerException("NullError"));
+     }
+ }
+\ No newline at end of file
+Index: src/main/exceptions/BorrowingBookLimitOver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/exceptions/BorrowingBookLimitOver.java b/src/main/exceptions/BorrowingBookLimitOver.java
+new file mode 100644
+--- /dev/null	(date 1700146096529)
++++ b/src/main/exceptions/BorrowingBookLimitOver.java	(date 1700146096529)
+@@ -0,0 +1,7 @@
++package main.exceptions;
++
++public class BorrowingBookLimitOver extends Exception{
++    public BorrowingBookLimitOver(String e){
++        super(e);
++    }
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_16\" default=\"true\" project-jdk-name=\"16\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision db2991eed29877258eeb9512bddfb453e1b20d97)
++++ b/.idea/misc.xml	(date 1700146096525)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_16" default="true" project-jdk-name="16" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>### IntelliJ IDEA ###\r\nout/\r\n!**/src/main/**/out/\r\n!**/src/test/**/out/\r\n\r\n### Eclipse ###\r\n.apt_generated\r\n.classpath\r\n.factorypath\r\n.project\r\n.settings\r\n.springBeans\r\n.sts4-cache\r\nbin/\r\n!**/src/main/**/bin/\r\n!**/src/test/**/bin/\r\n\r\n### NetBeans ###\r\n/nbproject/private/\r\n/nbbuild/\r\n/dist/\r\n/nbdist/\r\n/.nb-gradle/\r\n\r\n### VS Code ###\r\n.vscode/\r\n\r\n### Mac OS ###\r\n.DS_Store
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision db2991eed29877258eeb9512bddfb453e1b20d97)
++++ b/.gitignore	(date 1700146920041)
+@@ -3,27 +3,11 @@
+ !**/src/main/**/out/
+ !**/src/test/**/out/
+ 
+-### Eclipse ###
+-.apt_generated
+-.classpath
+-.factorypath
+-.project
+-.settings
+-.springBeans
+-.sts4-cache
+-bin/
+-!**/src/main/**/bin/
+-!**/src/test/**/bin/
+-
+-### NetBeans ###
+-/nbproject/private/
+-/nbbuild/
+-/dist/
+-/nbdist/
+-/.nb-gradle/
+-
+ ### VS Code ###
+ .vscode/
+ 
+ ### Mac OS ###
+-.DS_Store
+\ No newline at end of file
++.DS_Store
++
++.idea
++*.iml
+Index: src/main/exceptions/PhoneNumberNotValid.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/exceptions/PhoneNumberNotValid.java b/src/main/exceptions/PhoneNumberNotValid.java
+new file mode 100644
+--- /dev/null	(date 1700146096531)
++++ b/src/main/exceptions/PhoneNumberNotValid.java	(date 1700146096531)
+@@ -0,0 +1,7 @@
++package main.exceptions;
++
++public class PhoneNumberNotValid extends Exception{
++    public PhoneNumberNotValid(String e){
++        super(e);
++    }
++}
+Index: src/main/exceptions/ReissueNotValid.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/exceptions/ReissueNotValid.java b/src/main/exceptions/ReissueNotValid.java
+new file mode 100644
+--- /dev/null	(date 1700146096532)
++++ b/src/main/exceptions/ReissueNotValid.java	(date 1700146096532)
+@@ -0,0 +1,7 @@
++package main.exceptions;
++
++public class ReissueNotValid extends Exception{
++    public ReissueNotValid(String s){
++        super();
++    }
++}
+Index: src/main/exceptions/InvalidInput.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/exceptions/InvalidInput.java b/src/main/exceptions/InvalidInput.java
+new file mode 100644
+--- /dev/null	(date 1700146096529)
++++ b/src/main/exceptions/InvalidInput.java	(date 1700146096529)
+@@ -0,0 +1,7 @@
++package main.exceptions;
++
++public class InvalidInput extends Exception{
++    public InvalidInput (String e){
++        super(e);
++    }
++}
+Index: src/main/exceptions/NotAuthorizedForAction.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/exceptions/NotAuthorizedForAction.java b/src/main/exceptions/NotAuthorizedForAction.java
+new file mode 100644
+--- /dev/null	(date 1700146096530)
++++ b/src/main/exceptions/NotAuthorizedForAction.java	(date 1700146096530)
+@@ -0,0 +1,7 @@
++package main.exceptions;
++
++public class NotAuthorizedForAction extends Exception{
++    public NotAuthorizedForAction(String e){
++        super(e);
++    }
++}

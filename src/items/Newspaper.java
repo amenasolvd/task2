@@ -18,31 +18,6 @@ public class Newspaper extends Item {
     }
 
     @Override
-    public String getTitle() {
-        return super.getTitle();
-    }
-
-    @Override
-    public void setTitle(String title) {
-        super.setTitle(title);
-    }
-
-    @Override
-    public int getItemId() {
-        return super.getItemId();
-    }
-
-    @Override
-    public String getPublication() {
-        return super.getPublication();
-    }
-
-    @Override
-    public void setPublication(String publication) {
-        super.setPublication(publication);
-    }
-
-    @Override
     public String toString() {
         return "Newspaper{" +
                 "publishedDate=" + publishedDate +

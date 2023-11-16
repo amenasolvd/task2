@@ -11,41 +11,12 @@ public class Magazine extends Item {
         this.category = category;
     }
 
-    @Override
-    public String getTitle() {
-        return null;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        super.setTitle(title);
-    }
-
-    @Override
-    public int getItemId() {
-        return super.getItemId();
-    }
-
-    @Override
-    public String getPublication() {
-        return super.getPublication();
-    }
-
-    @Override
-    public void setPublication(String publication) {
-        super.setPublication(publication);
-    }
-
     public void setCategory(String category) {
         this.category = category;
     }
 
     public String getCategory() {
-        this.category = category;
         return category;
-    }
-
-    public void setCategory() {
     }
 
     @Override

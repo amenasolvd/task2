@@ -15,9 +15,16 @@ public class Main {
         Book[] book = new Book[2];
         Magazine[] magazine = new Magazine[2];
         Newspaper[] newspaper = new Newspaper[1];
+<<<<<<< HEAD
         Library library = new Library();
         Library.printLibraryInfo();
         library.addMember(member1);
         System.out.println(member1);
+=======
+        for (Member i : member) {
+            System.out.println(member);
+        }
+        Library.printLibraryInfo();
+>>>>>>> ac0c2d13e3777ab1e98185ec5d48d72218d479d2
     }
 }
