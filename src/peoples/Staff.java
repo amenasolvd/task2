@@ -18,7 +18,7 @@ public class Staff extends Person {
     }
 
     public String getFirstname() {
-        return this.firstname;
+        return firstname;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Staff extends Person {
 
 
     public String getLastname() {
-        return this.lastname;
+        return lastname;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class Staff extends Person {
     }
 
     public String getPhoneNo() {
-        return this.phoneNo;
+        return phoneNo;
     }
 
     @Override
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     @Override

@@ -16,11 +16,7 @@ public class Magazine extends Item {
     }
 
     public String getCategory() {
-        this.category = category;
         return category;
-    }
-
-    public void setCategory() {
     }
 
     @Override

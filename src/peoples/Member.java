@@ -12,7 +12,7 @@ public class Member extends Person {
 
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
-        cardId = (int) (Math.random() + 10000);
+        cardId = (int) Math.random() + 10000;
         this.libraryCardId = cardId;
     }
 
@@ -22,7 +22,7 @@ public class Member extends Person {
 
     @Override
     public String getFirstname() {
-        return this.firstname;
+        return firstname;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Member extends Person {
 
     @Override
     public String getLastname() {
-        return this.lastname;
+        return lastname;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Member extends Person {
 
     @Override
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Member extends Person {
 
     @Override
     public String getPhoneNo() {
-        return this.phoneNo;
+        return phoneNo;
     }
 
     public List<Book> addIssuedBook(Book book) {

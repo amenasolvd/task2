@@ -10,8 +10,8 @@ public class Item {
 
     public Item(String title, int itemId, String publication) {
         this.title = title;
-        itemId = (int) (Math.random() + 1000);
-        this.itemId =itemId;
+        itemId = (int) Math.random() + 1000;
+        this.itemId = itemId;
         this.publication = publication;
     }
 

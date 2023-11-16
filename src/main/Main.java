@@ -17,13 +17,9 @@ public class Main {
         Book[] book = new Book[2];
         Magazine[] magazine = new Magazine[2];
         Newspaper[] newspaper = new Newspaper[1];
-        Library library = new Library();
         for (Member i : member) {
             System.out.println(member);
         }
         Library.printLibraryInfo();
-        log.debug("Debug Message Logged !!!");
-        log.info("Info Message Logged !!!");
-        log.error("Error Message Logged !!!", new NullPointerException("NullError"));
     }
 }
