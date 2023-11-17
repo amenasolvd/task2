@@ -1,7 +1,7 @@
 package main.exceptions;
 
-public class NotAuthorizedForAction extends Exception{
-    public NotAuthorizedForAction(String e){
+public class NotAuthorizedException extends Exception{
+    public NotAuthorizedException(String e){
         super(e);
     }
 }
