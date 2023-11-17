@@ -1,19 +1,21 @@
 package items;
 
+import java.util.Date;
+
 public class Newspaper extends Item {
 
-    private int publishedDate;
+    private Date publishedDate;
 
-    public Newspaper(int publishedDate, String title, int itemId, String publication){
+    public Newspaper(Date publishedDate, String title, int itemId, String publication){
         super(title, itemId, publication);
         this.publishedDate =publishedDate;
     }
 
-    public int getPublishedDate() {
+    public Date getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(int publishedDate) {
+    public void setPublishedDate(Date publishedDate) {
         this.publishedDate = publishedDate;
     }
 

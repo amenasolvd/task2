@@ -1,16 +1,18 @@
 package items;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Item {
 
     private int itemId;
     private String title;
     private String publication;
+    Random rand = new Random();
 
     public Item(String title, int itemId, String publication) {
         this.title = title;
-        itemId = (int) Math.random() + 1000;
+        itemId = rand.nextInt(999999-10000+100);
         this.itemId = itemId;
         this.publication = publication;
     }

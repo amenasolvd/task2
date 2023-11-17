@@ -2,6 +2,7 @@ package peoples;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import items.Book;
 
@@ -9,10 +10,10 @@ public class Member extends Person {
 
     private final int libraryCardId;
     public List<Book> issuedBook;
-
+    Random rand = new Random();
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
-        cardId = (int) Math.random() + 10000;
+        cardId = rand.nextInt(99999-10000+100);
         this.libraryCardId = cardId;
     }
 
