@@ -1,12 +1,14 @@
 package main;
 
 import items.*;
-import main.exceptions.PhoneNumberNotValid;
+import main.exceptions.PhoneNoNotValidException;
 import peoples.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 public class Main {
 
-    public static void main(String[] args) throws PhoneNumberNotValid {
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    public static void main(String[] args) throws PhoneNoNotValidException {
         Member member1 = new Member("amena","kureshi","amena.k@gmail.com","1565622665",1 );
         Staff[] staff = new Staff[2];
         Manager[] manager = new Manager[1];
@@ -18,6 +20,7 @@ public class Main {
         Library library = new Library();
         Library.printLibraryInfo();
         library.addMember(member1);
+        LOGGER.info("details of Member",member1);
         System.out.println(member1);
         Library.printLibraryInfo();
     }

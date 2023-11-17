@@ -1,7 +1,7 @@
 package main.exceptions;
 
-public class ReissueNotValid extends Error{
-    public ReissueNotValid(String e){
+public class ReissueNotValidException extends Error{
+    public ReissueNotValidException(String e){
         super(e);
     }
 }

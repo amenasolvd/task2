@@ -10,11 +10,9 @@ public class Member extends Person {
 
     private final int libraryCardId;
     public List<Book> issuedBook;
-    Random rand = new Random();
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
-        cardId = rand.nextInt(99999-10000+100);
-        this.libraryCardId = cardId;
+        this.libraryCardId = cardId = new Random().nextInt(99999-10000)+10000;
     }
 
     public int getLibraryCardId() {

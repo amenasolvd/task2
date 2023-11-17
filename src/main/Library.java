@@ -74,37 +74,37 @@ public class Library implements ILibrary {
         getBookList().add(book);
     }
 
-    public boolean deleteBook(Book book, Staff staff) throws NotAuthorizedForAction {
+    public boolean deleteBook(Book book, Staff staff) throws NotAuthorizedException {
         if (staff.getDesignation().equals("Manager")) {
             if (this.getBookList().contains(book.getItemId())) {
                 getBookList().remove(book);
             }
             return true;
         }
-        throw new NotAuthorizedForAction("You are not authorized to delete a book");
+        throw new NotAuthorizedException("You are not authorized to delete a book");
     }
 
-    public void addMember(Member member) throws PhoneNumberNotValid {
+    public void addMember(Member member) throws PhoneNoNotValidException {
         if (member.phoneNo.length() == 10) {
             getMemberList().add(member);
         } else {
-            throw new PhoneNumberNotValid("This is not a valid Phone number");
+            throw new PhoneNoNotValidException("This is not a valid Phone number");
         }
     }
 
-    public final boolean deleteMember(Staff staff, Member member) throws NotAuthorizedForAction {
+    public final boolean deleteMember(Staff staff, Member member) throws NotAuthorizedException {
         if (staff.getDesignation().equals("Manager")) {
             if (this.getMemberList().contains(member.getLibraryCardId())) {
                 getMemberList().remove(member);
             }
             return true;
         }
-        throw new NotAuthorizedForAction("You are not authorized to delete member");
+        throw new NotAuthorizedException("You are not authorized to delete member");
     }
 
-    public boolean issue(Member member, Book book) throws BorrowingBookLimitOver {
+    public boolean issue(Member member, Book book) throws BorrowingBookLimitOverException {
         if (member.getAddIssuedBooks() >= 3) {
-            throw new BorrowingBookLimitOver("You can't issue more than three books");
+            throw new BorrowingBookLimitOverException("You can't issue more than three books");
         } else {
             member.addIssuedBook(book);
             bookList.remove(book);
@@ -112,7 +112,7 @@ public class Library implements ILibrary {
         }
     }
 
-    public boolean reissue(Member member, Book book) throws ReissueNotValid {
+    public boolean reissue(Member member, Book book) throws ReissueNotValidException {
         try {
             int reissueCount = 0;
             if (this.issue(member, book) == true && reissueCount < 1) {
@@ -123,8 +123,8 @@ public class Library implements ILibrary {
                 reissueCount++;
                 return true;
             }
-            throw new ReissueNotValid("Reissue is allowed only once");
-        } catch (BorrowingBookLimitOver | ReissueNotValid e) {
+            throw new ReissueNotValidException("Reissue is allowed only once");
+        } catch (BorrowingBookLimitOverException | ReissueNotValidException e) {
             LOG.error("Your are exceeding borrowing book limit");
             return false;
         }
@@ -140,8 +140,7 @@ public class Library implements ILibrary {
     }
 
     public static void searchBook(Book book) {
-        Scanner sc = new Scanner(System.in);
-        try {
+        try (Scanner sc = new Scanner(System.in)){
             LOG.info("search by title");
             String searchTitle = sc.nextLine();                         //This may throw exception if user don't put input
             for (Book i : bookList) {
@@ -152,8 +151,6 @@ public class Library implements ILibrary {
             LOG.info("no Book found");
         } catch (Exception e) {
             LOG.info("Give valid search input");
-        } finally {
-            sc.close();
         }
     }
 
@@ -168,10 +165,10 @@ public class Library implements ILibrary {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(newsDate);
             LocalDate date = LocalDate.parse(newsDate);
             if (date.isAfter(localDate)) {
-                throw new InvalidInput("Date is invalid");
+                throw new InvalidInputException("Date is invalid");
             }
             newspaperList.add(newspaper);
-        } catch (InvalidInput e) {
+        } catch (InvalidInputException e) {
             LOG.error("Enter Date in correct format ");
         } finally {
             sc.close();

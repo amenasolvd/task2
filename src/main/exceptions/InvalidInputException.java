@@ -1,7 +1,7 @@
 package main.exceptions;
 
-public class InvalidInput extends Error{
-    public InvalidInput(String e){
+public class InvalidInputException extends Error{
+    public InvalidInputException(String e){
         super(e);
     }
 }

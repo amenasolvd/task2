@@ -8,12 +8,10 @@ public class Item {
     private int itemId;
     private String title;
     private String publication;
-    Random rand = new Random();
 
     public Item(String title, int itemId, String publication) {
         this.title = title;
-        itemId = rand.nextInt(999999-10000+100);
-        this.itemId = itemId;
+        this.itemId = itemId= new Random().nextInt(999999-10000)+1000;
         this.publication = publication;
     }
 

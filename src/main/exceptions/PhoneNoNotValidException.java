@@ -1,7 +1,7 @@
 package main.exceptions;
 
-public class PhoneNumberNotValid extends Exception{
-    public PhoneNumberNotValid(String e){
+public class PhoneNoNotValidException extends Exception{
+    public PhoneNoNotValidException(String e){
         super(e);
     }
 }
