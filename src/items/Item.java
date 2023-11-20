@@ -11,7 +11,7 @@ public class Item {
 
     public Item(String title, int itemId, String publication) {
         this.title = title;
-        this.itemId = itemId= new Random().nextInt(999999-10000)+1000;
+        this.itemId = new Random().nextInt(999999 - 10000) + 1000;
         this.publication = publication;
     }
 

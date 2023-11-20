@@ -155,8 +155,9 @@ public class Library implements ILibrary {
     }
 
     public void addNewspaper(Newspaper newspaper) {
-        Scanner sc = new Scanner(System.in);
+
         try {
+            Scanner sc = new Scanner(System.in);
             LOG.info("Enter name of newspaper");
             String newspaperTitle = sc.nextLine();
             LOG.info("Enter published of newspaper in yyyy/mm/dd format");
@@ -170,8 +171,6 @@ public class Library implements ILibrary {
             newspaperList.add(newspaper);
         } catch (InvalidInputException e) {
             LOG.error("Enter Date in correct format ");
-        } finally {
-            sc.close();
         }
     }
 

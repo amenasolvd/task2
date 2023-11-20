@@ -10,9 +10,10 @@ public class Member extends Person {
 
     private final int libraryCardId;
     public List<Book> issuedBook;
+
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
-        this.libraryCardId = cardId = new Random().nextInt(99999-10000)+10000;
+        this.libraryCardId = new Random().nextInt(99999 - 10000) + 10000;
     }
 
     public int getLibraryCardId() {
@@ -46,7 +47,7 @@ public class Member extends Person {
 
     @Override
     public void setEmail(String email) {
-       this.email = email;
+        this.email = email;
     }
 
     @Override

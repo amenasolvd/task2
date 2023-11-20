@@ -3,11 +3,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-library.iml
-.idea
+*.idea
+*.iml
+*.logs
 
 ### VS Code ###
 .vscode/
-
-### Mac OS ###
-.DS_Store
