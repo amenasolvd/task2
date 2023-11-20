@@ -1,6 +1,7 @@
 package items;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Item {
 
@@ -10,8 +11,7 @@ public class Item {
 
     public Item(String title, int itemId, String publication) {
         this.title = title;
-        itemId = (int) Math.random() + 1000;
-        this.itemId = itemId;
+        this.itemId = new Random().nextInt(999999 - 10000) + 1000;
         this.publication = publication;
     }
 
