@@ -6,17 +6,19 @@ import items.Newspaper;
 import main.exceptions.*;
 import peoples.Member;
 import peoples.Staff;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Library implements ILibrary {
 
-    private static final Logger LOG = LogManager.getLogger(main.Library.class);
+    private static final Logger LOGGER = LogManager.getLogger(main.Library.class);
     private static final String libraryName = "Billerica Public Library";
     private static final String website = "https://billericalibrary.org/";
     private static final String address = "15 Concord Rd, Billerica, MA 01821";
@@ -125,7 +127,7 @@ public class Library implements ILibrary {
             }
             throw new ReissueNotValidException("Reissue is allowed only once");
         } catch (BorrowingBookLimitOverException | ReissueNotValidException e) {
-            LOG.error("Your are exceeding borrowing book limit");
+            LOGGER.error("Your are exceeding borrowing book limit");
             return false;
         }
     }
@@ -140,27 +142,26 @@ public class Library implements ILibrary {
     }
 
     public static void searchBook(Book book) {
-        try (Scanner sc = new Scanner(System.in)){
-            LOG.info("search by title");
+        try (Scanner sc = new Scanner(System.in)) {
+            LOGGER.info("search by title");
             String searchTitle = sc.nextLine();                         //This may throw exception if user don't put input
             for (Book i : bookList) {
                 if (book.getTitle().contains(searchTitle)) {
-                    LOG.info("Search result:  " + book);
+                    LOGGER.info("Search result:  " + book);
                 }
             }
-            LOG.info("no Book found");
+            LOGGER.info("no Book found");
         } catch (Exception e) {
-            LOG.info("Give valid search input");
+            LOGGER.info("Give valid search input");
         }
     }
 
     public void addNewspaper(Newspaper newspaper) {
-
         try {
             Scanner sc = new Scanner(System.in);
-            LOG.info("Enter name of newspaper");
+            LOGGER.info("Enter name of newspaper");
             String newspaperTitle = sc.nextLine();
-            LOG.info("Enter published of newspaper in yyyy/mm/dd format");
+            LOGGER.info("Enter published of newspaper in yyyy/mm/dd format");
             String newsDate = sc.next();                                            //This might throw Exception
             LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(newsDate);
@@ -170,7 +171,7 @@ public class Library implements ILibrary {
             }
             newspaperList.add(newspaper);
         } catch (InvalidInputException e) {
-            LOG.error("Enter Date in correct format ");
+            LOGGER.error("Enter Date in correct format ");
         }
     }
 
