@@ -1,15 +1,15 @@
-package arrayList;
+package arraylist;
 
 import java.util.Iterator;
 
-public interface ICustomList<E> extends Iterator {
+public interface ICustomArrayList<E> extends Iterator {
     boolean isEmpty();
 
     int size();
 
-    boolean add(int index, E element);
+    boolean add(E element);
 
-    Object remove(int index);
+    void remove(E element);
 
     Object get(int index);
 
@@ -20,6 +20,5 @@ public interface ICustomList<E> extends Iterator {
     boolean contains(E element);
 
     E[] toArray();
-
 
 }

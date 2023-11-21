@@ -1,4 +1,4 @@
-package customLinkedList;
+package linkedlist;
 
 public class Node<T> {
 
