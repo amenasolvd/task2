@@ -55,12 +55,11 @@ public class Member extends Person {
         return phoneNo;
     }
 
-    public TreeSet<Book> addIssuedBook(Book book) {
+    public void addIssuedBook(Book book) {
         issuedBooks.add(book);
-        return issuedBooks;
     }
 
-    public int getAddIssuedBooks() {
+    public int getAddIssuedBooksCount() {
         return issuedBooks.size();
     }
 

@@ -24,8 +24,8 @@ public class Main {
         library.addMember(member);
         library.addBook(book1);
         library.addBook(book2);
-        Library.printBookInfo();
-        Library.printMemberInfo();
+        Library.printAllBookInfo();
+        Library.printAllMemberInfo();
         Library.printLibraryInfo();
     }
 }

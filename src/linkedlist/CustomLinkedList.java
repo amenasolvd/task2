@@ -3,20 +3,20 @@ package linkedlist;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomLinkedList<T> implements ICustomLinkedList<T>{
+public class CustomLinkedList<T> implements ICustomLinkedList<T> {
 
     public Node<T> head;
     private int length = 0;
 
-    public CustomLinkedList(){
+    public CustomLinkedList() {
         this.head = null;
     }
 
-    int length() { return this.length; }
+    int length() {
+        return this.length;
+    }
 
-    boolean empty()
-    {
-
+    boolean empty() {
         // Checking if next node points to null
         if (head == null) {
             return true;
@@ -45,7 +45,7 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T>{
             head = head.next;
             return;
         }
-        Node<T> current = head  ;
+        Node<T> current = head;
         while (current.next != null && !current.next.data.equals(data)) {
             current = current.next;
         }
