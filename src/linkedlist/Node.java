@@ -2,11 +2,11 @@ package linkedlist;
 
 public class Node<T> {
 
-    T data;
-    Node<T> nextNode;
+    private T data;
+    private Node<T> nextNode;
 
     public Node(T data) {
         this.data = data;
-        this.next = null;
+        this.nextNode = null;
     }
 }
