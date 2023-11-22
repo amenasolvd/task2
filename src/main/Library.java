@@ -1,23 +1,18 @@
 package main;
 
 import arraylist.CustomArrayList;
-import items.Book;
-import items.Magazine;
-import items.Newspaper;
+import exceptions.*;
+import items.*;
 import linkedlist.CustomLinkedList;
-import main.exceptions.*;
-import peoples.Member;
-import peoples.Staff;
-
+import peoples.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class Library implements ILibrary {
+public class Library implements main.ILibrary {
 
     private static final Logger LOGGER = LogManager.getLogger(main.Library.class);
     private static final String libraryName = "Billerica Public Library";

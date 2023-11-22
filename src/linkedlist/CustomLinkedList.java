@@ -1,15 +1,14 @@
 package linkedlist;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class CustomLinkedList<T> implements ICustomLinkedList<T> {
 
-    public Node<T> head;
+    private Node<T> head;
     private int length = 0;
 
     public CustomLinkedList() {
-        this.head = null;
     }
 
     int getLength() {
@@ -24,16 +23,16 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         return false;
     }
 
-    public void add(T data) {
-        Node<T> newNode = new Node<T>(data);
+    public void add(Node node, T data) {
+        Node<T> newNode = new Node<>(data);
         if (this.head == null) {
-            this.head = newNode;
+            head = newNode;
         } else {
             Node<T> current = head;
-            while (current.next != null) {
-                current = current.next;
+            while (current.getNextNode() != null) {
+                current = current.getNextNode();
             }
-            current.next = newNode;
+            current.setNextNode(newNode);
         }
     }
 
@@ -41,15 +40,15 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         if (head == null) {
             return;
         }
-        if (head.data.equals(data)) {
-            head = head.next;
+        if (head.getData().equals(data)) {
+            head = head.getNextNode();
             return;
         }
         Node<T> current = head;
-        while (current.next != null && !current.next.data.equals(data)) {
-            current = current.next;
+        while (current.getNextNode() != null && ! current.getNextNode().getData().equals(data)) {
+            current = current.getNextNode();
         }
-        if (current.next != null) {
+        if (current.getNextNode() != null) {
             current.next = current.next.next;
         }
     }
@@ -58,8 +57,8 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         List<T> newList = new ArrayList<>();
         Node<T> current = head;
         while (current != null) {
-            newList.add(current.data);
-            current = current.next;
+            newList.add(current.getData);
+            current = current.getNextNode();
         }
         return newList;
     }

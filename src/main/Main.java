@@ -1,7 +1,7 @@
 package main;
 
+import exceptions.PhoneNoNotValidException;
 import items.*;
-import main.exceptions.PhoneNoNotValidException;
 import peoples.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(main.Main.class);
 
-    public static void main(String[] args) throws PhoneNoNotValidException {
+    public static void main(String[] args) throws PhoneNoNotValidException, PhoneNoNotValidException {
         Member member = new Member("amena","kureshi","amena.k@gmail.com","1565622665",1 );
         Staff[] staff = new Staff[2];
         Manager[] manager = new Manager[1];
