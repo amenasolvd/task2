@@ -12,11 +12,11 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         this.head = null;
     }
 
-    int length() {
+    int getLength() {
         return this.length;
     }
 
-    boolean empty() {
+    boolean isEmpty() {
         // Checking if next node points to null
         if (head == null) {
             return true;
