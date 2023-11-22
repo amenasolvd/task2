@@ -7,6 +7,6 @@ import java.util.TreeSet;
 
 public interface IMember {
 
-    TreeSet<Book> addIssuedBook(Book book);
-    int getAddIssuedBooks();
+    void addIssuedBook(Book book);
+    int getAddIssuedBooksCount();
 }
