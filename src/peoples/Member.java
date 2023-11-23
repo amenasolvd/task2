@@ -3,13 +3,12 @@ package peoples;
 import java.util.Objects;
 import java.util.Random;
 import java.util.TreeSet;
-
 import items.Book;
 
 public class Member extends Person {
 
     private final int libraryCardId;
-    private TreeSet<Book> issuedBooks = new TreeSet<Book>();
+    private TreeSet<Book> issuedBooks = new TreeSet<>();
 
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);

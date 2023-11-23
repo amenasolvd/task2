@@ -7,6 +7,7 @@ import linkedlist.CustomLinkedList;
 import peoples.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -21,20 +22,20 @@ public class Library implements main.ILibrary {
     private static final String phone = "(978) 671-0949";
     private static CustomLinkedList<Book> bookList = new CustomLinkedList<>();
     private static CustomArrayList<Magazine> magazineList = new CustomArrayList<>();
-    private static ArrayList<Member> memberList = new ArrayList<Member>();
+    private static CustomLinkedList<Member> memberList = new CustomLinkedList<>();
     private static ArrayList<Staff> staffList = new ArrayList<>();
     private static Set<Newspaper> newspaperList = new HashSet<>();
-    HashMap<Integer, TreeSet> assignBook = new HashMap<>();
+    HashMap<Integer, TreeSet<Book>> assignBook = new HashMap<>();
 
     public Library() {
     }
 
-    public ArrayList<Member> getMemberList() {
+    public CustomLinkedList<Member> getMemberList() {
         return memberList;
     }
 
-    public void setMemberList(ArrayList<Member> memberList) {
-        this.memberList = memberList;
+    public void setMemberList(CustomLinkedList<Member> memberList) {
+        Library.memberList = memberList;
     }
 
     public ArrayList<Staff> getStaffList() {
@@ -42,7 +43,7 @@ public class Library implements main.ILibrary {
     }
 
     public void setStaffList(ArrayList<Staff> staffList) {
-        this.staffList = staffList;
+        Library.staffList = staffList;
     }
 
     public CustomLinkedList<Book> getBookList() {
@@ -50,7 +51,7 @@ public class Library implements main.ILibrary {
     }
 
     public void setBookList(CustomLinkedList<Book> bookList) {
-        this.bookList = bookList;
+        Library.bookList = bookList;
     }
 
     public CustomArrayList<Magazine> getMagazineList() {
@@ -58,21 +59,20 @@ public class Library implements main.ILibrary {
     }
 
     public void setMagazineList(CustomArrayList<Magazine> magazineList) {
-        this.magazineList = magazineList;
+        Library.magazineList = magazineList;
     }
 
     public Set<Newspaper> getNewspaper() {
         return newspaperList;
     }
 
-    public CustomLinkedList<Book> addBook(Book book) {
+    public void addBook(Book book) {
         bookList.add(book);
-        return bookList;
     }
 
     public boolean deleteBook(Book book, Staff staff) throws NotAuthorizedException {
         if (staff.getDesignation().equals("Manager")) {
-            if (this.getBookList().equals(book.getItemId())) {
+            if (this.getBookList().contains(book)) {
                 bookList.remove(book);
             }
             return true;
@@ -80,19 +80,22 @@ public class Library implements main.ILibrary {
         throw new NotAuthorizedException("You are not authorized to delete a book");
     }
 
-    public ArrayList<Member> addMember(Member member) throws PhoneNoNotValidException {
+    public void addMember(Member member) throws PhoneNoNotValidException {
+        System.out.println("Inside add Member Class");
         if (member.getPhoneNo().length() == 10) {
+            System.out.println("Inside If loop phone number length");
             memberList.add(member);
+            System.out.println("After Member is added");
             LOGGER.info("member added");
+            System.out.println("After Logged");
         } else {
             throw new PhoneNoNotValidException("This is not a valid Phone number");
         }
-        return memberList;
     }
 
     public final boolean deleteMember(Staff staff, Member member) throws NotAuthorizedException {
         if (staff.getDesignation().equals("Manager")) {
-            if (this.getMemberList().equals(member.getLibraryCardId())) {
+            if (this.getMemberList().contains(member)) {
                 getMemberList().remove(member);
             }
             return true;
@@ -114,7 +117,7 @@ public class Library implements main.ILibrary {
     public boolean reissue(Member member, Book book) throws ReissueNotValidException {
         try {
             int reissueCount = 0;
-            if (assignBook.containsValue(book) && reissueCount < 1) {
+            if (assignBook.containsValue(book.getItemId()) && reissueCount < 1) {
                 this.issue(member, book);
                 reissueCount++;
                 return true;
@@ -127,7 +130,7 @@ public class Library implements main.ILibrary {
     }
 
     public boolean returnBook(Member member, Book book) {
-        if (member.addIssuedBook(book).equals(book)) {
+        if (member.addIssuedBook(book).contains(book)) {
             assignBook.remove(book.getItemId(), member.getLibraryCardId());
             bookList.add(book);
             member.addIssuedBook(book).remove(book);
@@ -174,7 +177,7 @@ public class Library implements main.ILibrary {
     public static void printLibraryInfo() {
         System.out.println("Library Name: " + libraryName + '\'' +
                 "Library address: " + address + '\'' +
-                "Phone Number: " + phone + "\'" +
+                "Phone Number: " + phone + '\'' +
                 "Website: " + website + '\'');
     }
 
@@ -185,8 +188,9 @@ public class Library implements main.ILibrary {
     }
 
     public static void printAllMemberInfo() {
-        for (Member i : memberList) {
+        for (Member i : memberList.getAll()) {
             LOGGER.info("MemberList : " + i);
+            System.out.println("MemberList : " + i);
         }
     }
 }

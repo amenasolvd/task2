@@ -17,10 +17,7 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
 
     boolean isEmpty() {
         // Checking if next node points to null
-        if (head == null) {
-            return true;
-        }
-        return false;
+        return head == null;
     }
 
     public void add(T data) {
@@ -62,5 +59,14 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
             current = current.getNextNode();
         }
         return newList;
+    }
+
+    public boolean contains(T data){
+        if (head != null){
+            Node<T> current  = head;
+            while(current.getNextNode() != null || current != data){
+                current = current.getNextNode();
+            } return true;
+        } return false;
     }
 }
