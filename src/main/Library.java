@@ -21,7 +21,7 @@ public class Library implements main.ILibrary {
     private static final String phone = "(978) 671-0949";
     private static CustomLinkedList<Book> bookList = new CustomLinkedList<>();
     private static CustomArrayList<Magazine> magazineList = new CustomArrayList<>();
-    private static CustomLinkedList<Member> memberList = new CustomLinkedList<>();
+    private static ArrayList<Member> memberList = new ArrayList<Member>();
     private static ArrayList<Staff> staffList = new ArrayList<>();
     private static Set<Newspaper> newspaperList = new HashSet<>();
     HashMap<Integer, TreeSet> assignBook = new HashMap<>();
@@ -29,11 +29,11 @@ public class Library implements main.ILibrary {
     public Library() {
     }
 
-    public CustomLinkedList<Member> getMemberList() {
+    public ArrayList<Member> getMemberList() {
         return memberList;
     }
 
-    public void setMemberList(CustomLinkedList<Member> memberList) {
+    public void setMemberList(ArrayList<Member> memberList) {
         this.memberList = memberList;
     }
 
@@ -80,10 +80,10 @@ public class Library implements main.ILibrary {
         throw new NotAuthorizedException("You are not authorized to delete a book");
     }
 
-    public CustomLinkedList<Member> addMember(Member member) throws PhoneNoNotValidException {
-        if (member.phoneNo.length() == 10) {
+    public ArrayList<Member> addMember(Member member) throws PhoneNoNotValidException {
+        if (member.getPhoneNo().length() == 10) {
             memberList.add(member);
-            LOGGER.info("book added");
+            LOGGER.info("member added");
         } else {
             throw new PhoneNoNotValidException("This is not a valid Phone number");
         }
@@ -101,7 +101,7 @@ public class Library implements main.ILibrary {
     }
 
     public boolean issue(Member member, Book book) throws BorrowingBookLimitOverException {
-        if (member.getAddIssuedBooks() >= 3) {
+        if (member.getAddIssuedBooksCount() >= 3) {
             throw new BorrowingBookLimitOverException("You can't issue more than three books");
         } else {
             member.addIssuedBook(book);
@@ -185,7 +185,7 @@ public class Library implements main.ILibrary {
     }
 
     public static void printAllMemberInfo() {
-        for (Member i : memberList.getAll()) {
+        for (Member i : memberList) {
             LOGGER.info("MemberList : " + i);
         }
     }

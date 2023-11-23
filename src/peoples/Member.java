@@ -9,7 +9,7 @@ import items.Book;
 public class Member extends Person {
 
     private final int libraryCardId;
-    private TreeSet<Book> issuedBooks = new TreeSet<>();
+    private TreeSet<Book> issuedBooks = new TreeSet<Book>();
 
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
@@ -55,8 +55,9 @@ public class Member extends Person {
         return phoneNo;
     }
 
-    public void addIssuedBook(Book book) {
+    public TreeSet<Book> addIssuedBook(Book book) {
         issuedBooks.add(book);
+        return issuedBooks;
     }
 
     public int getAddIssuedBooksCount() {

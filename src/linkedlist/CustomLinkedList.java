@@ -1,8 +1,8 @@
 package linkedlist;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class CustomLinkedList<T> implements ICustomLinkedList<T> {
 
     private Node<T> head;
@@ -23,7 +23,7 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         return false;
     }
 
-    public void add(Node node, T data) {
+    public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (this.head == null) {
             head = newNode;
@@ -33,6 +33,7 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
                 current = current.getNextNode();
             }
             current.setNextNode(newNode);
+            length++;
         }
     }
 
@@ -45,11 +46,11 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
             return;
         }
         Node<T> current = head;
-        while (current.getNextNode() != null && ! current.getNextNode().getData().equals(data)) {
+        while (current.getNextNode() != null && !current.getNextNode().getData().equals(data)) {
             current = current.getNextNode();
         }
         if (current.getNextNode() != null) {
-            current.next = current.next.next;
+            current.setNextNode(current.getNextNode().getNextNode());
         }
     }
 
@@ -57,7 +58,7 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         List<T> newList = new ArrayList<>();
         Node<T> current = head;
         while (current != null) {
-            newList.add(current.getData);
+            newList.add(current.getData());
             current = current.getNextNode();
         }
         return newList;

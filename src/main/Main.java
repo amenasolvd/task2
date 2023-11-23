@@ -10,7 +10,7 @@ public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(main.Main.class);
 
-    public static void main(String[] args) throws PhoneNoNotValidException, PhoneNoNotValidException {
+    public static void main(String[] args) throws PhoneNoNotValidException {
         Member member = new Member("amena","kureshi","amena.k@gmail.com","1565622665",1 );
         Staff[] staff = new Staff[2];
         Manager[] manager = new Manager[1];
