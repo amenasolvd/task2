@@ -7,7 +7,6 @@ import linkedlist.CustomLinkedList;
 import peoples.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -83,11 +82,8 @@ public class Library implements main.ILibrary {
     public void addMember(Member member) throws PhoneNoNotValidException {
         System.out.println("Inside add Member Class");
         if (member.getPhoneNo().length() == 10) {
-            System.out.println("Inside If loop phone number length");
             memberList.add(member);
-            System.out.println("After Member is added");
             LOGGER.info("member added");
-            System.out.println("After Logged");
         } else {
             throw new PhoneNoNotValidException("This is not a valid Phone number");
         }
