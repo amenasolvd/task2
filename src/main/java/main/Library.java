@@ -25,7 +25,6 @@ public class Library implements main.ILibrary {
     private static CustomLinkedList<Member> memberList = new CustomLinkedList<>();
     private static ArrayList<Staff> staffList = new ArrayList<>();
     private static Set<Newspaper> newspaperList = new HashSet<>();
-    HashMap<Integer, TreeSet<Book>> assignBook = new HashMap<>();
 
     public Library() {
     }
@@ -35,7 +34,7 @@ public class Library implements main.ILibrary {
     }
 
     public void setMemberList(CustomLinkedList<Member> memberList) {
-        Library.memberList = memberList;
+        this.memberList = memberList;
     }
 
     public ArrayList<Staff> getStaffList() {
@@ -43,7 +42,7 @@ public class Library implements main.ILibrary {
     }
 
     public void setStaffList(ArrayList<Staff> staffList) {
-        Library.staffList = staffList;
+        this.staffList = staffList;
     }
 
     public CustomLinkedList<Book> getBookList() {
@@ -51,7 +50,7 @@ public class Library implements main.ILibrary {
     }
 
     public void setBookList(CustomLinkedList<Book> bookList) {
-        Library.bookList = bookList;
+        this.bookList = bookList;
     }
 
     public CustomArrayList<Magazine> getMagazineList() {
@@ -59,7 +58,7 @@ public class Library implements main.ILibrary {
     }
 
     public void setMagazineList(CustomArrayList<Magazine> magazineList) {
-        Library.magazineList = magazineList;
+        this.magazineList = magazineList;
     }
 
     public Set<Newspaper> getNewspaper() {
@@ -112,7 +111,7 @@ public class Library implements main.ILibrary {
     public boolean reissue(Member member, Book book) throws ReissueNotValidException {
         try {
             int reissueCount = 0;
-            if (assignBook.containsValue(book.getItemId()) && reissueCount < 1) {
+            if (reissueCount < 1) {
                 this.issue(member, book);
                 reissueCount++;
                 return true;
@@ -126,7 +125,6 @@ public class Library implements main.ILibrary {
 
     public boolean returnBook(Member member, Book book) {
         if (member.getIssuedBooks().contains(book)) {
-            assignBook.remove(book.getItemId(), member.getLibraryCardId());
             bookList.add(book);
             member.getIssuedBooks().remove(book);
             return true;
