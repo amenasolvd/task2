@@ -7,6 +7,7 @@ import linkedlist.CustomLinkedList;
 import peoples.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -103,7 +104,6 @@ public class Library implements main.ILibrary {
             throw new BorrowingBookLimitOverException("You can't issue more than three books");
         } else {
             member.addIssuedBook(book);
-            assignBook.put(member.getLibraryCardId(), member.addIssuedBook(book));
             bookList.remove(book);
             return true;
         }
@@ -125,10 +125,10 @@ public class Library implements main.ILibrary {
     }
 
     public boolean returnBook(Member member, Book book) {
-        if (member.addIssuedBook(book).contains(book)) {
+        if (member.getIssuedBooks().contains(book)) {
             assignBook.remove(book.getItemId(), member.getLibraryCardId());
             bookList.add(book);
-            member.addIssuedBook(book).remove(book);
+            member.getIssuedBooks().remove(book);
             return true;
         }
         return false;
@@ -184,7 +184,6 @@ public class Library implements main.ILibrary {
     public static void printAllMemberInfo() {
         for (Member i : memberList.getAll()) {
             LOGGER.info("MemberList : " + i);
-            System.out.println("MemberList : " + i);
         }
     }
 }

@@ -61,12 +61,14 @@ public class CustomLinkedList<T> implements ICustomLinkedList<T> {
         return newList;
     }
 
-    public boolean contains(T data){
-        if (head != null){
-            Node<T> current  = head;
-            while(current.getNextNode() != null || current != data){
+    public boolean contains(T data) {
+        if (head != null) {
+            Node<T> current = head;
+            while (current.getNextNode() != null || current != data) {
                 current = current.getNextNode();
-            } return true;
-        } return false;
+            }
+            return true;
+        }
+        return false;
     }
 }
