@@ -99,7 +99,7 @@ public class Library implements main.ILibrary {
     }
 
     public boolean issue(Member member, Book book) throws BorrowingBookLimitOverException {
-        if (member.getAddIssuedBooksCount() >= 3) {
+        if (member.getIssuedBooksCount() >= 3) {
             throw new BorrowingBookLimitOverException("You can't issue more than three books");
         } else {
             member.addIssuedBook(book);
@@ -126,7 +126,7 @@ public class Library implements main.ILibrary {
     public boolean returnBook(Member member, Book book) {
         if (member.getIssuedBooks().contains(book)) {
             bookList.add(book);
-            member.getIssuedBooks().remove(book);
+            member.removeIssuedBook(book);
             return true;
         }
         return false;

@@ -3,6 +3,7 @@ package peoples;
 import java.util.Objects;
 import java.util.Random;
 import java.util.TreeSet;
+
 import items.Book;
 
 public class Member extends Person {
@@ -62,8 +63,12 @@ public class Member extends Person {
         return issuedBooks;
     }
 
-    public int getAddIssuedBooksCount() {
+    public int getIssuedBooksCount() {
         return issuedBooks.size();
+    }
+
+    public void removeIssuedBook(Book book) {
+        issuedBooks.remove(book);
     }
 
     @Override
