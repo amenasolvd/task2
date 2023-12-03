@@ -1,15 +1,15 @@
 package peoples;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.TreeSet;
 
 import items.Book;
 
 public class Member extends Person {
 
     private final int libraryCardId;
-    public List<Book> issuedBook;
+    private TreeSet<Book> issuedBooks = new TreeSet<>();
 
     public Member(String firstname, String lastname, String email, String phoneNo, int cardId) {
         super(firstname, lastname, email, phoneNo);
@@ -55,13 +55,20 @@ public class Member extends Person {
         return phoneNo;
     }
 
-    public List<Book> addIssuedBook(Book book) {
-        issuedBook.add(book);
-        return issuedBook;
+    public void addIssuedBook(Book book) {
+        issuedBooks.add(book);
     }
 
-    public int getAddIssuedBooks() {
-        return issuedBook.size();
+    public TreeSet<Book> getIssuedBooks() {
+        return issuedBooks;
+    }
+
+    public int getIssuedBooksCount() {
+        return issuedBooks.size();
+    }
+
+    public void removeIssuedBook(Book book) {
+        issuedBooks.remove(book);
     }
 
     @Override
@@ -80,7 +87,7 @@ public class Member extends Person {
     public String toString() {
         return "Member{" +
                 "libraryCardId=" + libraryCardId +
-                ", issuedBook=" + issuedBook +
+                ", issuedBook=" + issuedBooks +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +

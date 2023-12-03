@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration monitorInterval="60">
     <Properties>
-        <Property name="log-path">logs</Property>
+        <Property name="log4j2.xml">logs</Property>
         <Property name="archive">${log-path}/archive</Property>
     </Properties>
     <Appenders>
@@ -21,10 +21,11 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="log4jconfiguration" level="debug">
-            <AppenderRef ref="File-Appender" level="error"/>
+        <logger>name="log4j.configuration" </logger>
+        <Logger level="DEBUG">
+            <AppenderRef ref="File-Appender" level="DEBUG"/>
         </Logger>
-        <Root level="debug">
+        <Root level="DEBUG" additivity="false">
             <AppenderRef ref="Console-Appender"/>
         </Root>
     </Loggers>

@@ -6,6 +6,6 @@ out/
 *.idea
 *.iml
 *.logs
-
+*/target/*
 ### VS Code ###
 .vscode/
